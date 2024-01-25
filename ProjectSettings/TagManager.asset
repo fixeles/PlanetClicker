@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Car
+  - ResetDriftCollision
+  - ResetCarTrigger
   layers:
   - Default
   - TransparentFX
@@ -13,15 +16,15 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Car
+  - Road
+  - BrakingGround
+  - Metal
+  - Rubber
+  - FinishZone
+  - "\u0421oncrete"
+  - Path
+  - WheelCollider
   - 
   - 
   - 
