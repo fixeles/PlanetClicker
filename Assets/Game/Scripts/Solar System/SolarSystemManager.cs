@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Scripts.StarSystem;
 using UnityEngine;
 
 namespace SolarSystem
 {
-	[ExecuteInEditMode]
+	
 	public class SolarSystemManager : MonoBehaviour
 	{
 
@@ -19,7 +20,7 @@ namespace SolarSystem
 		[Header("References")]
 		public Sun sun;
 		public EarthOrbit earth;
-		public Moon moon;
+		public SpaceBody spaceBody;
 		public Transform player;
 
 		[Header("Time state")]
@@ -61,9 +62,8 @@ namespace SolarSystem
 				yearT %= 1;
 			}
 
-			earth?.UpdateOrbit(yearT, dayT, geocentric);
+			//earth?.UpdateOrbit(yearT, dayT, geocentric);
 			sun?.UpdateOrbit(earth, geocentric);
-			moon?.UpdateOrbit(monthT, earth, geocentric);
 
 		}
 
