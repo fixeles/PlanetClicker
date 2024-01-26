@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace SubLib.Extensions
+namespace Game.Scripts
 {
     public static class ExtensionsMain
     {

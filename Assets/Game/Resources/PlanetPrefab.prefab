@@ -149,8 +149,9 @@ GameObject:
   - component: {fileID: 8886580386441639491}
   - component: {fileID: 2362024679899085848}
   - component: {fileID: 7848350406842400364}
+  - component: {fileID: -7172889108897256162}
   m_Layer: 0
-  m_Name: Planet
+  m_Name: PlanetPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,8 +165,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7476730361013520459}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.09641406, y: -0.5440148, z: 0.14545515, w: 0.82072836}
-  m_LocalPosition: {x: 13.335264, y: 7.655939, z: 16.123808}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -255,14 +256,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5a9f3ca4b8f29b46962aec947eaf3f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  tilt: -20.1
-  orbitAngle: 30
-  periapsis: 6.2
-  apoapsis: 3.56
-  dstMultiplier: 4
-  orbitState: 0.9142752
-  orbitPerSecond: 0.1
-  selfRotationState: 0.89951533
-  selfRotationPerSecond: 0.1
+  motionData:
+    tilt: 0
+    orbitAngle: 0
+    periapsis: 0.01
+    apoapsis: 0
+    dstMultiplier: 0
+    orbitState: 0
+    orbitPerSecond: 0
+    selfRotationState: 0
+    selfRotationPerSecond: 0.1
+    <LastPosition>k__BackingField: {x: 0, y: 0, z: 0}
+    <LastRotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
   cachedTransform: {fileID: 1450491992657051417}
+--- !u!114 &-7172889108897256162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476730361013520459}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls: []

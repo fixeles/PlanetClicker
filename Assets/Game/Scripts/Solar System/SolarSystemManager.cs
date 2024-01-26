@@ -20,7 +20,7 @@ namespace SolarSystem
 		[Header("References")]
 		public Sun sun;
 		public EarthOrbit earth;
-		public SpaceBody spaceBody;
+		public SpaceBodyView spaceBodyView;
 		public Transform player;
 
 		[Header("Time state")]
