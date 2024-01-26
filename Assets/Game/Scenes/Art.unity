@@ -15803,6 +15803,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: YellowStar
       objectReference: {fileID: 0}
+    - target: {fileID: 571107925160151930, guid: 70ff459556dc23241abd7beaa03857a8,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

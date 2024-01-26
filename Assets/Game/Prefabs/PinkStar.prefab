@@ -17,6 +17,18 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 13.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 13.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 13.976
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -59,7 +71,11 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 66cede4d479cdb149bc9592c4d076d94, type: 2}
+      objectReference: {fileID: 2100000, guid: f719d9a147600014da5ec4b06a3ab70d, type: 2}
+    - target: {fileID: 2300000, guid: be1f9a99a6ea8a945a07b8a63cb3fd9a, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f719d9a147600014da5ec4b06a3ab70d, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -141,12 +157,12 @@ PrefabInstance:
     - target: {fileID: 7219463543786449575, guid: bed418ffae018b94fbfc5d344e58c6f1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
-      value: 0.9921711
+      value: 0.9843137
       objectReference: {fileID: 0}
     - target: {fileID: 7219463543786449575, guid: bed418ffae018b94fbfc5d344e58c6f1,
         type: 3}
       propertyPath: InitialModule.startColor.maxColor.g
-      value: 0.6650944
+      value: 0.63529414
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

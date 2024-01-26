@@ -470,8 +470,8 @@
     "m_AlphaMode": 0,
     "m_RenderFace": 2,
     "m_AlphaClip": true,
-    "m_CastShadows": true,
-    "m_ReceiveShadows": true,
+    "m_CastShadows": false,
+    "m_ReceiveShadows": false,
     "m_SupportsLODCrossFade": false,
     "m_CustomEditorGUI": "",
     "m_SupportVFX": false
@@ -489,10 +489,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -627.0000610351563,
-            "y": -83.99992370605469,
-            "width": 204.00015258789063,
-            "height": 34.00016784667969
+            "x": -627.0,
+            "y": -51.9999885559082,
+            "width": 204.0,
+            "height": 34.0000114440918
         }
     },
     "m_Slots": [
