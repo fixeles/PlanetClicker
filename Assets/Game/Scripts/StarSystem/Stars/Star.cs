@@ -11,6 +11,5 @@ namespace Game.Scripts.StarSystem.Stars
             Parent = this;
             Init();
         }
-
     }
 }

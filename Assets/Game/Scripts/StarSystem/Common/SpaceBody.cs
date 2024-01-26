@@ -9,7 +9,7 @@ namespace Game.Scripts.StarSystem.Common
     public abstract class SpaceBody
     {
         private static readonly ResourcesObject<SpaceBodyView> Prefab = new("PlanetPrefab");
-        
+
         protected readonly HashSet<SpaceBody> Satellites = new();
         internal protected SpaceBody Parent;
         internal protected int Depth;
@@ -17,15 +17,9 @@ namespace Game.Scripts.StarSystem.Common
         protected IMotionData MotionData;
 
         private SpaceBodyView _view;
+        
+        public float SatellitesCount => Satellites.Count;
 
-        protected void Init()
-        {
-            _view = Object.Instantiate(Prefab.Value);
-            _view.transform.localScale = new Vector3(Size, Size, Size);
-            _view.Init(MotionData);
-            _view.SpawnSatelliteRequest += CreateSatellite;
-//size, eg...
-        }
 
         public void Update()
         {
@@ -35,6 +29,16 @@ namespace Game.Scripts.StarSystem.Common
                 satellite.Update();
             }
             _view.UpdateTransform(MotionData);
+        }
+        
+        
+        protected void Init()
+        {
+            _view = Object.Instantiate(Prefab.Value);
+            _view.transform.localScale = new Vector3(Size, Size, Size);
+            _view.Init(MotionData);
+            _view.SpawnSatelliteRequest += CreateSatellite;
+//size, eg...
         }
 
         private void CreateSatellite()

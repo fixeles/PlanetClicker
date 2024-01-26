@@ -8,7 +8,7 @@ namespace Game.Scripts.StarSystem.Stars
     [Serializable]
     public class StarMotionData : IMotionData
     {
-        [SerializeField] private float selfRotationState = Random.Range(-0.1f, 0.1f);
+        [SerializeField] private float selfRotationState = Random.Range(-0.5f, 0.5f);
         [SerializeField] private float selfRotationPerSecond = 0.03f;
         
         public Vector3 Position => Vector3.zero;

@@ -1,4 +1,5 @@
 using Game.Scripts.StarSystem.Common;
+using Game.Scripts.StarSystem.Stars;
 
 namespace Game.Scripts.StarSystem.Planets
 {
@@ -8,14 +9,14 @@ namespace Game.Scripts.StarSystem.Planets
         {
             Depth = parent.Depth + 1;
 
-            if (parent.Parent == parent)
+            if (parent is Star)
             {
-                Size = (parent.Size / 2) - 0.2f * Satellites.Count + 1;
+                Size = parent.Size / 2 - 0.2f * (Satellites.Count + 1);
             }
             else
-                Size = (parent.Size) - 0.2f * Satellites.Count + 1;
+                Size = parent.Size - 0.2f * (Satellites.Count + 1);
 
-            MotionData = new PlanetMotionData(Size);
+            MotionData = new PlanetMotionData(Size, parent.SatellitesCount);
             Parent = parent;
             Init();
         }
