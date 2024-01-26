@@ -21,10 +21,10 @@ namespace Game.Scripts.StarSystem.Planets
 
         public PlanetMotionData(float size, float satellitesCount)
         {
-            const float offsetMultiplier = 5;
-            var satellitesOffset = size * offsetMultiplier;
-            var distance = satellitesOffset * (satellitesCount + 1);
-            var ellipseDistortion = Random.Range(0.2f, 1f);
+            const float step = 5;
+            var satellitesOffset = size * step;
+            var distance = satellitesOffset * (satellitesCount + 1) + step * size;
+            var ellipseDistortion = Random.Range(0.4f, 1f);
             var isLeftDeform = Random.Range(0, 2);
             if (isLeftDeform == 1)
             {
@@ -67,16 +67,16 @@ namespace Game.Scripts.StarSystem.Planets
 
         private void SetRandomValues()
         {
-            tilt = Random.Range(-90, 90);
+            tilt = Random.Range(-60, 60);
             const float orbitMaxAbsAngle = 30;
             orbitTilt = new Vector2(
-                Random.Range(-orbitMaxAbsAngle, orbitMaxAbsAngle),
-                Random.Range(-orbitMaxAbsAngle, orbitMaxAbsAngle));
+                Random.Range(0, orbitMaxAbsAngle),
+                Random.Range(0, orbitMaxAbsAngle));
 
             var availableSpeed = new Vector2(0.05f, 0.15f);
-            orbitPerSecond = Random.Range(-availableSpeed.x, availableSpeed.y);
+            orbitPerSecond = Random.Range(availableSpeed.x, availableSpeed.y);
             orbitLoopState = Random.Range(0f, 0.5f);
-            selfRotationPerSecond = Random.Range(-availableSpeed.x, availableSpeed.y);
+            selfRotationPerSecond = Random.Range(availableSpeed.x, availableSpeed.y);
             selfRotationState = Random.Range(0f, 0.5f);
         }
     }

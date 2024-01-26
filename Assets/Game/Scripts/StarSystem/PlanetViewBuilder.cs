@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 namespace Game.Scripts.StarSystem
 {
-    public class PlanetBuilder : MonoBehaviour
+    public class PlanetViewBuilder : MonoBehaviour
     {
-        private static PlanetBuilder _instance;
+        private static PlanetViewBuilder _instance;
 
         [SerializeField] private SpaceBodyView viewContainerPrefab;
         [SerializeField] private MeshFilter[] planets;
@@ -21,17 +20,24 @@ namespace Game.Scripts.StarSystem
             var newBody = Instantiate(_instance.viewContainerPrefab);
             newBody.transform.localScale = Vector3.one * size;
 
+            Component newMesh;
             switch (bodyType)
             {
-                case SpaceBodyType.Planet:
-                     Instantiate(_instance.planets.GetRandomElement(), newBody.transform);
+                case SpaceBodyType.Star:
+                    newMesh = Instantiate(_instance.stars.GetRandomElement(), newBody.transform);
                     break;
 
-                case SpaceBodyType.Star:
-                    var mesh = Instantiate(_instance.stars.GetRandomElement(), newBody.transform);
+                default:
+                    newMesh = Instantiate(_instance.planets.GetRandomElement(), newBody.transform);
                     break;
             }
 
+            newMesh.transform.localRotation = new Quaternion(
+                Random.Range(0f, 1f),
+                Random.Range(0f, 1f),
+                Random.Range(0f, 1f),
+                Random.Range(0f, 1f)
+            );
             return newBody;
         }
 

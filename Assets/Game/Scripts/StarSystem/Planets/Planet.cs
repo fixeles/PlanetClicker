@@ -19,7 +19,7 @@ namespace Game.Scripts.StarSystem.Planets
             MotionData = new PlanetMotionData(Size, parent.SatellitesCount);
             Parent = parent;
 
-            View = PlanetBuilder.Create(Size);
+            View = PlanetViewBuilder.Create(Size);
             Init();
         }
     }

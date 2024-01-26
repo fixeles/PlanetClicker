@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using Game.Scripts.StarSystem.Planets;
-using Object = UnityEngine.Object;
 
 namespace Game.Scripts.StarSystem.Common
 {
@@ -15,7 +14,7 @@ namespace Game.Scripts.StarSystem.Common
         internal protected int Depth;
         internal protected float Size;
 
-        
+
         public float SatellitesCount => Satellites.Count;
 
         public void Update()
@@ -37,7 +36,9 @@ namespace Game.Scripts.StarSystem.Common
 
         private void CreateSatellite()
         {
-            Satellites.Add(new Planet(this));
+            var planet = new Planet(this);
+            Satellites.Add(planet);
+            CameraController.SwitchTarget(planet.View.transform);
         }
     }
 }
