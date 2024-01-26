@@ -8,7 +8,7 @@ namespace Game.Scripts.StarSystem.Common
         protected readonly HashSet<SpaceBody> Satellites = new();
 
         protected IMotionData MotionData;
-        protected SpaceBodyView View;
+        public SpaceBodyView View { get; protected set; }
         protected SpaceBody Parent;
 
         internal protected int Depth;
@@ -16,6 +16,12 @@ namespace Game.Scripts.StarSystem.Common
 
 
         public float SatellitesCount => Satellites.Count;
+
+        public void CreateSatellite()
+        {
+            var planet = new Planet(this);
+            Satellites.Add(planet);
+        }
 
         public void Update()
         {
@@ -30,15 +36,13 @@ namespace Game.Scripts.StarSystem.Common
         protected void Init()
         {
             View.Init(MotionData);
-            View.SpawnSatelliteRequest += CreateSatellite;
+            View.SelectEvent += Select;
 //size, eg...
         }
 
-        private void CreateSatellite()
+        private void Select()
         {
-            var planet = new Planet(this);
-            Satellites.Add(planet);
-            CameraController.SwitchTarget(planet.View.transform);
+            PlanetSelector.SelectedBody = this;
         }
     }
 }

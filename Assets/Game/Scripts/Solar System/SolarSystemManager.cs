@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Game.Scripts.StarSystem;
+using Game.Scripts.StarSystem.Common;
 using UnityEngine;
 
 namespace SolarSystem

@@ -11,9 +11,15 @@ namespace Game.Scripts
         private void Awake()
         {
             _instance = this;
+            PlanetSelector.SelectedObjectChangedEvent += FollowSelectedObject;
         }
 
-        public static void SwitchTarget(Transform target)
+        private static void FollowSelectedObject()
+        {
+            SwitchTarget(PlanetSelector.SelectedBody.View.transform);
+        }
+
+        private static void SwitchTarget(Transform target)
         {
             _instance.virtualCamera.Follow = target;
             _instance.virtualCamera.LookAt = target;
