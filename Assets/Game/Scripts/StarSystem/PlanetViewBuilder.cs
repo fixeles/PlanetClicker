@@ -9,6 +9,7 @@ namespace Game.Scripts.StarSystem
 
         [SerializeField] private SpaceBodyView viewContainerPrefab;
         [SerializeField] private MeshFilter[] planets;
+        [SerializeField] private MeshFilter[] moons;
         [SerializeField] private MeshFilter[] stars;
 
         private void Awake()
@@ -20,6 +21,7 @@ namespace Game.Scripts.StarSystem
         {
             var newBody = Instantiate(_instance.viewContainerPrefab);
             newBody.transform.localScale = Vector3.one * size;
+            newBody.Configure(size);
 
             Component newMesh;
             switch (bodyType)
@@ -29,7 +31,13 @@ namespace Game.Scripts.StarSystem
                     break;
 
                 default:
-                    newMesh = Instantiate(_instance.planets.GetRandomElement(), newBody.transform);
+                    if (size > 1.2f)
+                        newMesh = Instantiate(_instance.planets.GetRandomElement(), newBody.transform);
+                    else
+                    {
+                        newMesh = Instantiate(_instance.moons.GetRandomElement(), newBody.transform);
+                        newMesh.transform.localScale = Vector3.one * 2;
+                    }
                     break;
             }
 

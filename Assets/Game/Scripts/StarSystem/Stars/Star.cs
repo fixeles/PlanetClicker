@@ -10,6 +10,7 @@ namespace Game.Scripts.StarSystem.Stars
             MotionData = new StarMotionData();
             Parent = this;
             View = PlanetViewBuilder.Create(Size, PlanetViewBuilder.SpaceBodyType.Star);
+            Init();
 
             PlanetSelector.SelectedBody = this;
         }

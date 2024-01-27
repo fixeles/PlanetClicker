@@ -7,7 +7,8 @@ namespace Game.Scripts
     {
         public static event Action SelectedObjectChangedEvent;
         private static SpaceBody _selectedBody;
-        
+        private static int _iterator;
+
         public static SpaceBody SelectedBody
         {
             get => _selectedBody;
@@ -16,6 +17,24 @@ namespace Game.Scripts
                 _selectedBody = value;
                 SelectedObjectChangedEvent?.Invoke();
             }
+        }
+
+        public static void SelectNext()
+        {
+            _iterator++;
+            if (_iterator > SpaceBody.AllBodies.Count - 1)
+                _iterator = 0;
+
+            SelectedBody = SpaceBody.AllBodies[_iterator];
+        }
+
+        public static void SelectPrev()
+        {
+            _iterator--;
+            if (_iterator < 0)
+                _iterator = SpaceBody.AllBodies.Count - 1;
+
+            SelectedBody = SpaceBody.AllBodies[_iterator];
         }
     }
 }

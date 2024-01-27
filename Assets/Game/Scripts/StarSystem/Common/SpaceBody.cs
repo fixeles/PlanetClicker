@@ -5,6 +5,7 @@ namespace Game.Scripts.StarSystem.Common
 {
     public abstract class SpaceBody
     {
+        public static List<SpaceBody> AllBodies { get; private set; } = new();
         public SpaceBodyView View { get; protected set; }
         protected const float SatelliteSizeStep = 0.4f;
 
@@ -18,11 +19,10 @@ namespace Game.Scripts.StarSystem.Common
 
         public float SatellitesCount => Satellites.Count;
 
+        public bool CanCreateSatellite => Size > SatelliteSizeStep * (SatellitesCount + 2);
+
         public void CreateSatellite()
         {
-            if (Size < SatelliteSizeStep * (SatellitesCount + 1))
-                return;
-
             var planet = new Planet(this);
             Satellites.Add(planet);
         }
@@ -41,6 +41,7 @@ namespace Game.Scripts.StarSystem.Common
         {
             View.Init(MotionData);
             View.SelectEvent += Select;
+            AllBodies.Add(this);
 //size, eg...
         }
 

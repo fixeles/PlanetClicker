@@ -85,21 +85,21 @@ TrailRenderer:
       - serializedVersion: 3
         time: 0
         value: 1
-        inSlope: -0.79620546
-        outSlope: -0.79620546
-        tangentMode: 0
+        inSlope: 0
+        outSlope: -1
+        tangentMode: 69
         weightedMode: 0
         inWeight: 0.33333334
-        outWeight: 0.1318408
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
         value: 0
-        inSlope: -1.0846717
-        outSlope: -1.0846717
-        tangentMode: 0
+        inSlope: -1
+        outSlope: 0
+        tangentMode: 5
         weightedMode: 0
-        inWeight: 0.106965184
-        outWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -202,7 +202,7 @@ MonoBehaviour:
     selfRotationPerSecond: 0.1
     <Position>k__BackingField: {x: 0, y: 0, z: 0}
     <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
-  trail: {fileID: 0}
+  trail: {fileID: 4417225919021886382}
   cachedTransform: {fileID: 1450491992657051417}
 --- !u!135 &526193898596309004
 SphereCollider:
