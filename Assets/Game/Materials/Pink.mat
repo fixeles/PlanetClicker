@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Pink
+  m_Shader: {fileID: 4800000, guid: 42742f6bdbb75034987af53fce599bd6, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 3000
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _BaseTex3:
+        m_Texture: {fileID: 2800000, guid: 00fc16dbe879de44b8458bab1fbd59bf, type: 3}
+        m_Scale: {x: 2, y: 2}
+        m_Offset: {x: 0, y: 0}
+    - _DitherTexture:
+        m_Texture: {fileID: 2800000, guid: 3adf527c914df3b449b56a7b8446f919, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: fe094dd67783db442bb5db1e2908a674, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MatCap:
+        m_Texture: {fileID: 2800000, guid: e0b216b69b54a854896c8f08353d6690, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Project:
+        m_Texture: {fileID: 2800000, guid: e9378dfc2ea1ece4f8a1f2fbdfe9b1c2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UV2Tex:
+        m_Texture: {fileID: 2800000, guid: 929f2fb0e4fa033409d770aa87bea9b9, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Alpha: 1
+    - _D: -0.05
+    - _Deflect_flow: 0
+    - _EmissionColorOff: 0
+    - _G_width: 0
+    - _Noise_flow: 0.02
+    - _RIMoff: 0
+    - _RampSmooth: 1
+    - _RampThreshold: 0.387
+    - _ReceiveShadowsOff: 0
+    - _RimExponent: 1
+    - _RimPower: 1
+    - _RimSaturation: 1
+    - _RimSwitcher: -1
+    - _ScaleDithering: 0.03
+    - _UV2Power: 1
+    - _ZWrite: 1
+    - _controll_x: 0
+    - _controll_y: 1
+    - _controll_z: 1.3
+    - _nn: 5
+    - _tile: 0.54
+    - _tileOffsetX: 0
+    - _tileOffsetY: 0.802
+    - _z: 0
+    m_Colors:
+    - _ALLColor: {r: 1, g: 0.68882424, b: 0, a: 1}
+    - _Color_UV2Tex: {r: 1, g: 1, b: 1, a: 1}
+    - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _GColor: {r: 0.9238665, g: 0, b: 1.5902013, a: 1}
+    - _HColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MColor: {r: 1, g: 1, b: 1, a: 1}
+    - _MainColor: {r: 1, g: 1, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0.1806248, g: 0.24597278, b: 0.31132078, a: 1}
+  m_BuildTextureStacks: []

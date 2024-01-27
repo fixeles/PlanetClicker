@@ -14,7 +14,7 @@ Material:
   m_ValidKeywords:
   - _BACKGROUNDMODE_COLORS
   - _ENABLECLOUDSROTATION_ON
-  - _ENABLESTARSTWINKLING_ON
+  - _ENABLESTARSROTATION_ON
   - _ENABLESTARS_ON
   m_InvalidKeywords:
   - _BUILTINFOG_ON
@@ -229,9 +229,9 @@ Material:
     - _EnableSkyPatternOverlay: 1
     - _EnableStars: 1
     - _EnableStarsHeightMask: 0
-    - _EnableStarsRotation: 0
+    - _EnableStarsRotation: 1
     - _EnableStarsSunMask: 1
-    - _EnableStarsTwinkling: 1
+    - _EnableStarsTwinkling: 0
     - _EnableSun: 0
     - _EnableSunMask: 1
     - _EnableSunMoon: 1
@@ -275,7 +275,7 @@ Material:
     - _SkyPatternContrast: 0.99
     - _SkyPatternOverlay: 1
     - _SkyboxCat: 1
-    - _SkyboxOffset: -0.513
+    - _SkyboxOffset: -0.74
     - _SkyboxRotation: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -289,11 +289,11 @@ Material:
     - _StarsHeightMask: 0
     - _StarsHeigntMask: 1
     - _StarsHorizonMask: 1
-    - _StarsIntensity: 0.7
+    - _StarsIntensity: 0.43
     - _StarsLayer: 3
     - _StarsMaskPower: 1
-    - _StarsRotation: 360
-    - _StarsRotationSpeed: 0.5
+    - _StarsRotation: 0
+    - _StarsRotationSpeed: 0.05
     - _StarsSize: 0.109
     - _StarsSunMask: 0
     - _SunCat: 1
@@ -304,7 +304,7 @@ Material:
     - _SunorMoon: 1
     - _TITLE: 1
     - _ToggleSwitch0: 0
-    - _TwinklingContrast: 0.487
+    - _TwinklingContrast: 0.141
     - _TwinklingSpeed: 0.05
     - _TwinklingTextureContrast: 1
     - _UVSec: 0
@@ -333,12 +333,12 @@ Material:
     - _Color2: {r: 0.059472326, g: 0.25068596, b: 0.8088235, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Eq: {r: 1, g: 0.6769777, b: 0.330882, a: 0}
-    - _EquatorColor: {r: 0.18960185, g: 0.054067288, b: 0.4245283, a: 1}
+    - _EquatorColor: {r: 0.027298262, g: 0, b: 0.0754717, a: 1}
     - _Ground: {r: 0.4779411, g: 0.43111518, b: 0.23545504, a: 0}
-    - _GroundColor: {r: 0.30436447, g: 0.04396581, b: 0.49056602, a: 1}
+    - _GroundColor: {r: 0.03881165, g: 0, b: 0.066037714, a: 1}
     - _MoonColor: {r: 1, g: 1, b: 1, a: 1}
     - _Sky: {r: 0.6691177, g: 0.29519898, b: 0.29519898, a: 0}
-    - _SkyColor: {r: 0, g: 0, b: 0, a: 1}
+    - _SkyColor: {r: 0.14879754, g: 0, b: 0.44313726, a: 1}
     - _SkyboxRotationAxis: {r: 0, g: 1, b: 0, a: 0}
     - _Skycol: {r: 0.27941146, g: 0.64219046, b: 1, a: 0}
     - _StarsRotationAxis: {r: 0, g: 1, b: 0, a: 0}
