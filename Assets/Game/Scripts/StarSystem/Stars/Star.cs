@@ -12,7 +12,6 @@ namespace Game.Scripts.StarSystem.Stars
             View = PlanetViewBuilder.Create(Size, PlanetViewBuilder.SpaceBodyType.Star);
 
             PlanetSelector.SelectedBody = this;
-            Init();
         }
     }
 }
