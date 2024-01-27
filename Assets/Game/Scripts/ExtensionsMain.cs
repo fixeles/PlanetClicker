@@ -12,6 +12,13 @@ namespace Game.Scripts
             return array[Random.Range(0, array.Length)];
         }
 
+        public static T GetRandomElement<T>(this IEnumerable<T> collection, out int selectedIndex)
+        {
+            var array = collection.ToArray();
+            selectedIndex = Random.Range(0, array.Length);
+            return array[selectedIndex];
+        }
+
         public static int GetSameItemsCount<T>(this T[] array, T item)
         {
             int count = 0;

@@ -5,9 +5,8 @@ namespace Game.Scripts.StarSystem.Common
 {
     public abstract class SpaceBody
     {
-        public static List<SpaceBody> AllBodies { get; private set; } = new();
+        private static readonly List<SpaceBody> AllBodies = new();
         public SpaceBodyView View { get; protected set; }
-        protected const float SatelliteSizeStep = 0.4f;
 
         protected IMotionData MotionData;
         protected SpaceBody Parent;
@@ -17,9 +16,13 @@ namespace Game.Scripts.StarSystem.Common
         internal protected float Size;
 
 
+        public static int TotalBodiesCount => AllBodies.Count;
+
+        public static SpaceBody GetBody(int index) => AllBodies[index];
+
         public float SatellitesCount => Satellites.Count;
 
-        public bool CanCreateSatellite => Size > SatelliteSizeStep * (SatellitesCount + 2);
+        public bool CanCreateSatellite => Size > StaticData.SatelliteSizeStep * (SatellitesCount + 2);
 
         public void CreateSatellite()
         {
@@ -42,7 +45,6 @@ namespace Game.Scripts.StarSystem.Common
             View.Init(MotionData);
             View.SelectEvent += Select;
             AllBodies.Add(this);
-//size, eg...
         }
 
         private void Select()

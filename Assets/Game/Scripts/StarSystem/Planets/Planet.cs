@@ -10,16 +10,14 @@ namespace Game.Scripts.StarSystem.Planets
 
         public Planet(SpaceBody parent)
         {
-            float initialRadiusMultiplier;
+            const float initialRadiusMultiplier = 6;
             switch (parent)
             {
                 case Star:
-                    initialRadiusMultiplier = 6;
-                    Size = parent.Size / 2 - SatelliteSizeStep / 2 * (parent.SatellitesCount + 1);
+                    Size = parent.Size / 2 - StaticData.SatelliteSizeStep / 2 * (parent.SatellitesCount + 1);
                     break;
                 case Planet:
-                    initialRadiusMultiplier = 6;
-                    Size = parent.Size - SatelliteSizeStep * (parent.SatellitesCount + 1);
+                    Size = parent.Size - StaticData.SatelliteSizeStep * (parent.SatellitesCount + 1);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

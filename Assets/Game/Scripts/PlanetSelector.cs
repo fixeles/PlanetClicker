@@ -22,19 +22,20 @@ namespace Game.Scripts
         public static void SelectNext()
         {
             _iterator++;
-            if (_iterator > SpaceBody.AllBodies.Count - 1)
+            if (_iterator > SpaceBody.TotalBodiesCount - 1)
                 _iterator = 0;
 
-            SelectedBody = SpaceBody.AllBodies[_iterator];
+            SelectedBody = SpaceBody.GetBody(_iterator);
         }
 
         public static void SelectPrev()
         {
             _iterator--;
             if (_iterator < 0)
-                _iterator = SpaceBody.AllBodies.Count - 1;
+                _iterator = SpaceBody.TotalBodiesCount - 1;
 
-            SelectedBody = SpaceBody.AllBodies[_iterator];
+
+            SelectedBody = SpaceBody.GetBody(_iterator);
         }
     }
 }
