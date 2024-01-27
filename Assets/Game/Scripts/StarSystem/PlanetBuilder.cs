@@ -1,4 +1,4 @@
-using System;
+using Game.Scripts.StarSystem.Common;
 using UnityEngine;
 
 namespace Game.Scripts.StarSystem
