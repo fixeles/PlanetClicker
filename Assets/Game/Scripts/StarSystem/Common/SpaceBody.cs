@@ -1,22 +1,31 @@
 using System.Collections.Generic;
 using Game.Scripts.StarSystem.Planets;
-using Object = UnityEngine.Object;
 
 namespace Game.Scripts.StarSystem.Common
 {
     public abstract class SpaceBody
     {
-        protected readonly HashSet<SpaceBody> Satellites = new();
+        public SpaceBodyView View { get; protected set; }
+        protected const float SatelliteSizeStep = 0.4f;
 
         protected IMotionData MotionData;
-        protected SpaceBodyView View;
         protected SpaceBody Parent;
 
+        internal protected readonly List<Planet> Satellites = new();
         internal protected int Depth;
         internal protected float Size;
 
-        
+
         public float SatellitesCount => Satellites.Count;
+
+        public void CreateSatellite()
+        {
+            if (Size < SatelliteSizeStep * (SatellitesCount + 1))
+                return;
+
+            var planet = new Planet(this);
+            Satellites.Add(planet);
+        }
 
         public void Update()
         {
@@ -31,13 +40,13 @@ namespace Game.Scripts.StarSystem.Common
         protected void Init()
         {
             View.Init(MotionData);
-            View.SpawnSatelliteRequest += CreateSatellite;
+            View.SelectEvent += Select;
 //size, eg...
         }
 
-        private void CreateSatellite()
+        private void Select()
         {
-            Satellites.Add(new Planet(this));
+            PlanetSelector.SelectedBody = this;
         }
     }
 }

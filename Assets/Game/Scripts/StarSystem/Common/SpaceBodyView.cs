@@ -1,14 +1,13 @@
 using System;
-using Game.Scripts.StarSystem.Common;
 using Game.Scripts.StarSystem.Planets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Game.Scripts.StarSystem
+namespace Game.Scripts.StarSystem.Common
 {
     public class SpaceBodyView : MonoBehaviour, IPointerClickHandler
     {
-        public event Action SpawnSatelliteRequest;
+        public event Action SelectEvent;
 #if UNITY_EDITOR
         [SerializeField] private PlanetMotionData motionData;
 #endif
@@ -31,7 +30,7 @@ namespace Game.Scripts.StarSystem
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            SpawnSatelliteRequest?.Invoke();
+            SelectEvent?.Invoke();
         }
 
         private void OnValidate()

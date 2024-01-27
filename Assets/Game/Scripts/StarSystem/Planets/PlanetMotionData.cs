@@ -19,23 +19,26 @@ namespace Game.Scripts.StarSystem.Planets
         [SerializeField] private float selfRotationState;
         [SerializeField] private float selfRotationPerSecond;
 
-        public PlanetMotionData(float size, float satellitesCount)
+        public PlanetMotionData(float orbitRadius)
         {
-            const float offsetMultiplier = 5;
-            var satellitesOffset = size * offsetMultiplier;
-            var distance = satellitesOffset * (satellitesCount + 1);
-            var ellipseDistortion = Random.Range(0.2f, 1f);
+            var ellipseDistortion = Random.Range(0.6f, 1f);
             var isLeftDeform = Random.Range(0, 2);
             if (isLeftDeform == 1)
             {
-                periapsis = distance;
-                apoapsis = distance * ellipseDistortion;
+                periapsis = orbitRadius;
+                apoapsis = orbitRadius * ellipseDistortion;
             }
             else
             {
-                periapsis = distance * ellipseDistortion;
-                apoapsis = distance;
+                periapsis = orbitRadius * ellipseDistortion;
+                apoapsis = orbitRadius;
             }
+
+            orbitPerSecond = Random.Range(0.2f, 0.4f) / orbitRadius;
+            orbitLoopState = Random.Range(0f, 0.5f);
+            selfRotationPerSecond = Random.Range(0.5f, 0.15f);
+            selfRotationState = Random.Range(0f, 0.5f);
+
             SetRandomValues();
         }
 
@@ -67,17 +70,11 @@ namespace Game.Scripts.StarSystem.Planets
 
         private void SetRandomValues()
         {
-            tilt = Random.Range(-90, 90);
+            tilt = Random.Range(-60, 60);
             const float orbitMaxAbsAngle = 30;
             orbitTilt = new Vector2(
-                Random.Range(-orbitMaxAbsAngle, orbitMaxAbsAngle),
-                Random.Range(-orbitMaxAbsAngle, orbitMaxAbsAngle));
-
-            var availableSpeed = new Vector2(0.05f, 0.15f);
-            orbitPerSecond = Random.Range(-availableSpeed.x, availableSpeed.y);
-            orbitLoopState = Random.Range(0f, 0.5f);
-            selfRotationPerSecond = Random.Range(-availableSpeed.x, availableSpeed.y);
-            selfRotationState = Random.Range(0f, 0.5f);
+                Random.Range(0, orbitMaxAbsAngle),
+                Random.Range(2, orbitMaxAbsAngle));
         }
     }
 }
