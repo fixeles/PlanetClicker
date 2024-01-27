@@ -12,7 +12,9 @@ namespace Game.Scripts.StarSystem.Common
         [SerializeField] private PlanetMotionData motionData;
 #endif
 
+        [SerializeField] private TrailRenderer trail;
         [SerializeField] private Transform cachedTransform;
+
 
         public void Init(IMotionData data)
         {
@@ -28,6 +30,12 @@ namespace Game.Scripts.StarSystem.Common
             cachedTransform.rotation = data.Rotation;
         }
 
+        public void Configure(float planetSize)
+        {
+            trail.startWidth *= planetSize;
+            cachedTransform.localScale = Vector3.one * planetSize;
+        }
+
         public void OnPointerClick(PointerEventData eventData)
         {
             SelectEvent?.Invoke();
@@ -38,5 +46,4 @@ namespace Game.Scripts.StarSystem.Common
             cachedTransform ??= transform;
         }
     }
-
 }

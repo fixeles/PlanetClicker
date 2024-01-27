@@ -19,7 +19,7 @@ namespace Game.Scripts.StarSystem
         public static SpaceBodyView Create(float size, SpaceBodyType bodyType = SpaceBodyType.Planet)
         {
             var newBody = Instantiate(_instance.viewContainerPrefab);
-            newBody.transform.localScale = Vector3.one * size;
+            newBody.Configure(size);
 
             switch (bodyType)
             {

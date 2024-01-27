@@ -74,11 +74,11 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 15
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 7.984706
+    widthMultiplier: 3
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 7848350406842400364}
   - component: {fileID: 526193898596309004}
   m_Layer: 0
-  m_Name: PlanetPrefab
+  m_Name: SpaceBodyView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -202,6 +202,7 @@ MonoBehaviour:
     selfRotationPerSecond: 0.1
     <Position>k__BackingField: {x: 0, y: 0, z: 0}
     <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
+  trail: {fileID: 0}
   cachedTransform: {fileID: 1450491992657051417}
 --- !u!135 &526193898596309004
 SphereCollider:
