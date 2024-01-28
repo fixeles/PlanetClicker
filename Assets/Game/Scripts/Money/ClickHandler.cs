@@ -17,7 +17,8 @@ namespace Game.Scripts.Money
             if (IsCursorOverUI())
                 return;
 
-            Wallet.AddMoney(IncomeCalculator.IncomePerClick);
+            Wallet.AddMoney(2 *( Wallet.CurrentMoney+1));
+           // Wallet.AddMoney(IncomeCalculator.IncomePerClick);
         }
 
         private bool IsCursorOverUI()

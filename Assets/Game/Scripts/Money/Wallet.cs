@@ -15,7 +15,7 @@ namespace Game.Scripts.Money
             MoneyChangedEvent?.Invoke();
         }
 
-        public static bool TrySubtractMoney(float count)
+        public static bool TrySubtractMoney(double count)
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();

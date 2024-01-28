@@ -16,8 +16,14 @@ namespace Game.Scripts
         [SerializeField] private AnimationCurve incomeByDepth;
         [SerializeField] private AnimationCurve incomePerClickByPlanetsCount;
 
+        [Header("Price")]
+        [SerializeField] private AnimationCurve priceByDepth;
+        [SerializeField] private AnimationCurve priceByBodiesCount;
+        [SerializeField] private AnimationCurve priceBySatellitesCount;
 
-
+        public static AnimationCurve PriceBySatellitesCount => _instance.priceBySatellitesCount;
+        public static AnimationCurve PriceByTotalBodiesCount => _instance.priceByBodiesCount;
+        public static AnimationCurve PriceByDepth => _instance.priceByDepth;
         public static AnimationCurve IncomeByDepth => _instance.incomeByDepth;
         public static AnimationCurve IncomePerClickByPlanetsCount => _instance.incomePerClickByPlanetsCount;
         public static float SatelliteSizeStep => _instance.satelliteSizeStep;

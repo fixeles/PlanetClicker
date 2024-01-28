@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game.Scripts.UI
 {
-    public class CurrencyView : MonoBehaviour
+    public class UICurrencyView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI currencyCounter;
 

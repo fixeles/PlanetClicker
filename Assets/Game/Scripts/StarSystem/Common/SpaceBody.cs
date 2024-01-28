@@ -20,7 +20,7 @@ namespace Game.Scripts.StarSystem.Common
 
         public static SpaceBody GetBody(int index) => AllBodies[index];
 
-        public float SatellitesCount => Satellites.Count;
+        public int SatellitesCount => Satellites.Count;
 
         public bool CanCreateSatellite => Size > StaticData.SatelliteSizeStep * (SatellitesCount + 2);
 

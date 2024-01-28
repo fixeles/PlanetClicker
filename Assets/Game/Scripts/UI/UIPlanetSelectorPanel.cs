@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Game.Scripts.UI
 {
-    public class PlanetSelectorPanel : MonoBehaviour
+    public class UIPlanetSelectorPanel : MonoBehaviour
     {
         [SerializeField] private Button nextButton;
         [SerializeField] private Button prevButton;
