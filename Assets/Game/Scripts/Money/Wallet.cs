@@ -5,9 +5,9 @@ namespace Game.Scripts.Money
     public static class Wallet
     {
         public static event Action MoneyChangedEvent;
-        public static float CurrentMoney { get; private set; }
+        public static double CurrentMoney { get; private set; }
 
-        public static void AddMoney(float count)
+        public static void AddMoney(double count)
         {
             if (count < 0)
                 throw new ArgumentOutOfRangeException();

@@ -20,7 +20,7 @@ namespace Game.Scripts.UI
 
         private void UpdateCounter()
         {
-            currencyCounter.text = Wallet.CurrentMoney.ToString("0"); //todo write converter
+            currencyCounter.text = Wallet.CurrentMoney.ToShortString();
         }
     }
 }

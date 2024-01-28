@@ -19,9 +19,9 @@ namespace Game.Scripts.StarSystem.Planets
         [SerializeField] private float selfRotationState;
         [SerializeField] private float selfRotationPerSecond;
 
-        public PlanetMotionData(float orbitRadius)
+        public PlanetMotionData(float orbitRadius, int depth)
         {
-            var ellipseDistortion = Random.Range(0.6f, 1f);
+            var ellipseDistortion = Random.Range(0.5f, 1f);
             var isLeftDeform = Random.Range(0, 2);
             if (isLeftDeform == 1)
             {
@@ -34,7 +34,7 @@ namespace Game.Scripts.StarSystem.Planets
                 apoapsis = orbitRadius;
             }
 
-            orbitPerSecond = Random.Range(0.2f, 0.4f) / orbitRadius;
+            orbitPerSecond = Random.Range(0.2f, 0.4f) / orbitRadius * depth;
             orbitLoopState = Random.Range(0f, 0.5f);
             selfRotationPerSecond = Random.Range(0.5f, 0.15f);
             selfRotationState = Random.Range(0f, 0.5f);
@@ -74,7 +74,7 @@ namespace Game.Scripts.StarSystem.Planets
             const float orbitMaxAbsAngle = 30;
             orbitTilt = new Vector2(
                 Random.Range(0, orbitMaxAbsAngle),
-                Random.Range(2, orbitMaxAbsAngle));
+                Random.Range(1, orbitMaxAbsAngle));
         }
     }
 }

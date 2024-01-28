@@ -283,7 +283,7 @@ Material:
     - _StarFlikerSpeed: 0.05
     - _Stars: 1
     - _StarsAmount: 3
-    - _StarsBottomMask: 1
+    - _StarsBottomMask: 0
     - _StarsCat: 1
     - _StarsFlikerContrast: 1
     - _StarsHeightMask: 0

@@ -7,7 +7,6 @@ namespace Game.Scripts.Money
 {
     public class ClickHandler : MonoBehaviour
     {
-        [SerializeField] private ParticleSystem vfx;
         [SerializeField] private GraphicRaycaster raycaster;
 
         private void Update()

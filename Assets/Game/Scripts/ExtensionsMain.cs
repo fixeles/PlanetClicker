@@ -30,6 +30,19 @@ namespace Game.Scripts
             return count;
         }
 
+        public static string ToShortString(this double value)
+        {
+            return value switch
+            {
+                > 1_000_000_000_000_000 => value.ToString("G1"),
+                > 1_000_000_000_000 => $"{value / 1_000_000_000_000:N1}T",
+                > 1_000_000_000 => $"{value / 1_000_000_000:N1}B",
+                > 1_000_000 => $"{value / 1_000_000:N1}M",
+                > 1_000 => $"{value / 1_000:N1}K",
+                _ => value.ToString("0"),
+            };
+        }
+
         public static bool TrySetComponent<T>(this GameObject go, ref T component) where T : Component
         {
             if (component != null) return false;

@@ -10,13 +10,15 @@ namespace Game.Scripts.StarSystem.Planets
 
         public Planet(SpaceBody parent)
         {
-            const float initialRadiusMultiplier = 6;
+            float initialRadiusMultiplier;
             switch (parent)
             {
                 case Star:
+                    initialRadiusMultiplier = 10;
                     Size = parent.Size / 2 - StaticData.SatelliteSizeStep / 2 * (parent.SatellitesCount + 1);
                     break;
                 case Planet:
+                    initialRadiusMultiplier = 6;
                     Size = parent.Size - StaticData.SatelliteSizeStep * (parent.SatellitesCount + 1);
                     break;
                 default:
@@ -32,9 +34,9 @@ namespace Game.Scripts.StarSystem.Planets
                 _orbitRadius = initialRadiusMultiplier * parent.Size;
 
 
-            MotionData = new PlanetMotionData(_orbitRadius);
-
             Depth = parent.Depth + 1;
+            MotionData = new PlanetMotionData(_orbitRadius, Depth);
+
             Parent = parent;
             View = PlanetViewBuilder.Create(Size);
             Init();
