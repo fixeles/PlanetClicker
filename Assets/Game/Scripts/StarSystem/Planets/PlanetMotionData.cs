@@ -9,15 +9,20 @@ namespace Game.Scripts.StarSystem.Planets
     [Serializable]
     public class PlanetMotionData : IMotionData
     {
+        public event Action AxisTurnEvent;
+        public event Action OrbitTurnEvent;
         [SerializeField, Range(-90, 90)] private float tilt;
         [SerializeField, Min(0.01f)] private float periapsis = 0.01f;
         [SerializeField, Min(0)] private float apoapsis;
         [SerializeField] private Vector2 orbitTilt;
 
-        [SerializeField] private float orbitLoopState;
+        [SerializeField] private float orbitState;
         [SerializeField] private float orbitPerSecond;
-        [SerializeField] private float selfRotationState;
-        [SerializeField] private float selfRotationPerSecond;
+        [SerializeField] private float axisState;
+        [SerializeField] private float axisPerSecond;
+
+        [field: SerializeField] public Vector3 Position { get; private set; }
+        [field: SerializeField] public Quaternion Rotation { get; private set; }
 
         public PlanetMotionData(float orbitRadius, int depth)
         {
@@ -35,37 +40,37 @@ namespace Game.Scripts.StarSystem.Planets
             }
 
             orbitPerSecond = Random.Range(0.2f, 0.4f) / orbitRadius * depth;
-            orbitLoopState = Random.Range(0f, 0.5f);
-            selfRotationPerSecond = Random.Range(0.5f, 0.15f);
-            selfRotationState = Random.Range(0f, 0.5f);
+            orbitState = Random.Range(0, 0.5f);
+            axisPerSecond = Random.Range(0.5f, 0.15f);
+            axisState = Random.Range(0, 0.5f);
 
             SetRandomValues();
         }
 
-        [field: SerializeField] public Vector3 Position { get; private set; }
-        [field: SerializeField] public Quaternion Rotation { get; private set; }
+        public float OrbitPerSecond => orbitPerSecond;
+        public float AxisPerSecond => axisPerSecond;
 
         public void Update(Vector3 parentPosition)
         {
-            orbitLoopState += Time.deltaTime * orbitPerSecond;
-            if (orbitLoopState is > 1 or < 1)
+            orbitState += Time.deltaTime * orbitPerSecond;
+            if (orbitState is > 1 or < 0)
             {
-                orbitLoopState %= 1;
-                //add points
+                orbitState %= 1;
+                OrbitTurnEvent?.Invoke();
             }
-            selfRotationState += Time.deltaTime * selfRotationPerSecond;
-            if (selfRotationState is > 1 or < 1)
+            axisState += Time.deltaTime * axisPerSecond;
+            if (axisState is > 1 or < 0)
             {
-                selfRotationState %= 1;
-                //add points
+                axisState %= 1;
+                AxisTurnEvent?.Invoke();
             }
 
             var xAxis = new Vector3(Mathf.Cos(orbitTilt.x * Mathf.Deg2Rad), Mathf.Sin(orbitTilt.x * Mathf.Deg2Rad), 0);
             var yAxis = new Vector3(0, 1, orbitTilt.y).normalized;
 
-            var orbitPos = Orbit.CalculatePointOnOrbit(periapsis, apoapsis, orbitLoopState);
+            var orbitPos = Orbit.CalculatePointOnOrbit(periapsis, apoapsis, orbitState);
             Position = xAxis * orbitPos.x + yAxis * orbitPos.y + parentPosition;
-            Rotation = Quaternion.Euler(0, 0, -tilt) * Quaternion.Euler(0, -selfRotationState * 360, 0);
+            Rotation = Quaternion.Euler(0, 0, -tilt) * Quaternion.Euler(0, -axisState * 360, 0);
         }
 
         private void SetRandomValues()

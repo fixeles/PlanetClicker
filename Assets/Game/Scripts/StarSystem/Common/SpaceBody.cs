@@ -1,11 +1,15 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Scripts.StarSystem.Planets;
 
 namespace Game.Scripts.StarSystem.Common
 {
     public abstract class SpaceBody
     {
+        public static double TotalIncomePerSecond => AllBodies.Sum(spaceBody => spaceBody.IncomePerSecond);
+
         private static readonly List<SpaceBody> AllBodies = new();
+        public abstract double IncomePerSecond { get; }
         public SpaceBodyView View { get; protected set; }
 
         protected IMotionData MotionData;

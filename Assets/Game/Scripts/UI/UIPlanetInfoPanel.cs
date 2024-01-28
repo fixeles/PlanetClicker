@@ -14,13 +14,20 @@ namespace Game.Scripts.UI
         private void Start()
         {
             PlanetSelector.SelectedObjectChangedEvent += UpdateWindow;
+            Wallet.MoneyChangedEvent += UpdateWindow;
+            
             buySatelliteButton.onClick.AddListener(() =>
             {
-                if (!Wallet.TrySubtractMoney(PriceCalculator.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount)))
-                    return;
+                double nextSatellitePrice = PriceCalculator.NextSatellitePrice(
+                    PlanetSelector.SelectedBody.Depth,
+                    PlanetSelector.SelectedBody.SatellitesCount);
 
-                PlanetSelector.SelectedBody.CreateSatellite();
-                UpdateWindow();
+                Wallet.TrySubtractMoneyWithCallback(
+                    nextSatellitePrice,
+                    () =>
+                    {
+                        PlanetSelector.SelectedBody.CreateSatellite();
+                    });
             });
         }
 
@@ -36,8 +43,8 @@ namespace Game.Scripts.UI
         {
             double nextSatellitePrice = PriceCalculator.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount);
             nextSatellitePriceText.text = nextSatellitePrice.ToShortString();
-            buySatelliteButton.interactable = Wallet.CurrentMoney > nextSatellitePrice;
-            nextSatellitePriceText.color = Wallet.CurrentMoney > nextSatellitePrice ? Color.green : Color.red;
+            buySatelliteButton.interactable = Wallet.CurrentMoney >= nextSatellitePrice;
+            nextSatellitePriceText.color = Wallet.CurrentMoney >= nextSatellitePrice ? Color.green : Color.red;
         }
 
         private void OnDestroy()

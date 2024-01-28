@@ -26,5 +26,18 @@ namespace Game.Scripts.Money
             MoneyChangedEvent?.Invoke();
             return true;
         }
+
+        public static bool TrySubtractMoneyWithCallback(double count, Action callback)
+        {
+            if (count < 0)
+                throw new ArgumentOutOfRangeException();
+            if (CurrentMoney - count < 0)
+                return false;
+
+            CurrentMoney -= count;
+            callback.Invoke();
+            MoneyChangedEvent?.Invoke();
+            return true;
+        }
     }
 }

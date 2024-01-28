@@ -1,4 +1,6 @@
 using System;
+using Game.Scripts.Money;
+using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using Game.Scripts.StarSystem.Stars;
 
@@ -6,7 +8,19 @@ namespace Game.Scripts.StarSystem.Planets
 {
     public class Planet : SpaceBody
     {
+        private readonly PlanetUpgradeData _upgradeData;
         private readonly float _orbitRadius;
+
+        public override double IncomePerSecond
+        {
+            get
+            {
+                if (MotionData is PlanetMotionData motionData)
+                    return (motionData.OrbitPerSecond + motionData.AxisPerSecond) * _upgradeData.IncomeUpgrade.Level;
+
+                throw new Exception("Incorrect motion data");
+            }
+        }
 
         public Planet(SpaceBody parent)
         {
@@ -35,11 +49,26 @@ namespace Game.Scripts.StarSystem.Planets
 
 
             Depth = parent.Depth + 1;
-            MotionData = new PlanetMotionData(_orbitRadius, Depth);
+            var planetMotionData = new PlanetMotionData(_orbitRadius, Depth);
+            MotionData = planetMotionData;
 
             Parent = parent;
             View = PlanetViewBuilder.Create(Size);
             Init();
+
+            _upgradeData = new();
+            planetMotionData.AxisTurnEvent += AddAxisReward;
+            planetMotionData.OrbitTurnEvent += AddOrbitReward;
+        }
+
+        private void AddAxisReward()
+        {
+            Wallet.AddMoney(IncomeCalculator.PerAxisIncome(Depth, _upgradeData.IncomeUpgrade));
+        }
+
+        private void AddOrbitReward()
+        {
+            Wallet.AddMoney(IncomeCalculator.PerOrbitIncome(Depth, _orbitRadius, _upgradeData.IncomeUpgrade));
         }
     }
 }

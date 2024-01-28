@@ -1,20 +1,21 @@
+using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 
 namespace Game.Scripts.Money
 {
     public static class IncomeCalculator
     {
-        public static float PerAxisIncome(float axisPerSecond, int depth)
+        public static float PerAxisIncome(int depth, Upgrade incomeUpgrade)
         {
-            return axisPerSecond * StaticData.IncomeByDepth.Evaluate(depth);
+            return StaticData.IncomeByDepth.Evaluate(depth) * StaticData.IncomeByUpgrade.Evaluate(incomeUpgrade.Level);
         }
 
-        public static float PerOrbitIncome(float orbitPerSecond, int depth, float orbitRadius)
+        public static float PerOrbitIncome(int depth, float orbitRadius, Upgrade incomeUpgrade)
         {
-            return orbitPerSecond * StaticData.IncomeByDepth.Evaluate(depth) * orbitRadius;
+            return StaticData.IncomeByDepth.Evaluate(depth) * orbitRadius * StaticData.IncomeByUpgrade.Evaluate(incomeUpgrade.Level);
         }
 
-        public static float IncomePerClick => StaticData.IncomePerClickByPlanetsCount.Evaluate(SpaceBody.TotalBodiesCount);
+        public static double IncomePerClick => SpaceBody.TotalIncomePerSecond;
 
     }
 }
