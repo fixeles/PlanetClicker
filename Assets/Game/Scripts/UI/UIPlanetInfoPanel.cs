@@ -15,10 +15,10 @@ namespace Game.Scripts.UI
         {
             PlanetSelector.SelectedObjectChangedEvent += UpdateWindow;
             Wallet.MoneyChangedEvent += UpdateWindow;
-            
+
             buySatelliteButton.onClick.AddListener(() =>
             {
-                double nextSatellitePrice = PriceCalculator.NextSatellitePrice(
+                double nextSatellitePrice = StaticData.Price.NextSatellitePrice(
                     PlanetSelector.SelectedBody.Depth,
                     PlanetSelector.SelectedBody.SatellitesCount);
 
@@ -41,10 +41,10 @@ namespace Game.Scripts.UI
 
         private void UpdatePriceButton()
         {
-            double nextSatellitePrice = PriceCalculator.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount);
+            double nextSatellitePrice = StaticData.Price.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount);
             nextSatellitePriceText.text = nextSatellitePrice.ToShortString();
             buySatelliteButton.interactable = Wallet.CurrentMoney >= nextSatellitePrice;
-            nextSatellitePriceText.color = Wallet.CurrentMoney >= nextSatellitePrice ? Color.green : Color.red;
+            nextSatellitePriceText.color = Wallet.CurrentMoney >= nextSatellitePrice ? Color.white : Color.red;
         }
 
         private void OnDestroy()

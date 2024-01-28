@@ -15,7 +15,5 @@ namespace Game.Scripts.Money.Upgrades
         }
 
         public void AddLevel() => Level++;
-
-        public double NextLevelPrice(int depth) => StaticData.PriceByDepth.Evaluate(depth) * StaticData.PriceByUpgradeLevel.Evaluate(Level + 1);
     }
 }

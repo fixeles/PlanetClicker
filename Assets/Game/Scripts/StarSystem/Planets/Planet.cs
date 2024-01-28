@@ -15,10 +15,7 @@ namespace Game.Scripts.StarSystem.Planets
         {
             get
             {
-                if (MotionData is PlanetMotionData motionData)
-                    return (motionData.OrbitPerSecond + motionData.AxisPerSecond) * _upgradeData.IncomeUpgrade.Level;
-
-                throw new Exception("Incorrect motion data");
+                return StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade) + StaticData.Income.PerOrbit(Depth, _upgradeData.IncomeUpgrade);
             }
         }
 
@@ -63,12 +60,12 @@ namespace Game.Scripts.StarSystem.Planets
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(IncomeCalculator.PerAxisIncome(Depth, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade));
         }
 
         private void AddOrbitReward()
         {
-            Wallet.AddMoney(IncomeCalculator.PerOrbitIncome(Depth, _orbitRadius, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerOrbit(Depth, _upgradeData.IncomeUpgrade));
         }
     }
 }

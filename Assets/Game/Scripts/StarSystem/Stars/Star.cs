@@ -1,4 +1,3 @@
-using System;
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
@@ -12,10 +11,7 @@ namespace Game.Scripts.StarSystem.Stars
         {
             get
             {
-                if (MotionData is StarMotionData motionData)
-                    return motionData.AxisPerSecond * _upgradeData.IncomeUpgrade.Level;
-
-                throw new Exception("Incorrect motion data");
+                return StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade);
             }
         }
 
@@ -35,7 +31,7 @@ namespace Game.Scripts.StarSystem.Stars
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(IncomeCalculator.PerAxisIncome(Depth, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade));
         }
     }
 }
