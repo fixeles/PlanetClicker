@@ -1,17 +1,15 @@
 using Game.Scripts.Money;
-using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 
 namespace Game.Scripts.StarSystem.Stars
 {
     public class Star : SpaceBody
     {
-        private readonly SpaceBodyUpgradeData _upgradeData;
         public override double IncomePerSecond
         {
             get
             {
-                return StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade);
+                return StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade);
             }
         }
 
@@ -24,14 +22,14 @@ namespace Game.Scripts.StarSystem.Stars
             View = PlanetViewBuilder.Create(Size, PlanetViewBuilder.SpaceBodyType.Star);
             Init();
 
-            _upgradeData = new();
+            UpgradeData = new();
             PlanetSelector.SelectedBody = this;
             starMotionData.AxisTurnEvent += AddAxisReward;
         }
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade));
         }
     }
 }

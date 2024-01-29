@@ -1,14 +1,16 @@
 using Game.Scripts.Money;
-using TMPro;
+using Game.Scripts.Money.Upgrades;
+using Game.Scripts.StarSystem.Planets;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game.Scripts.UI
 {
     public class UIPlanetInfoPanel : MonoBehaviour
     {
-        [SerializeField] private Button buySatelliteButton;
-        [SerializeField] private TextMeshProUGUI nextSatellitePriceText;
+        [SerializeField] private BuyButton buySatelliteButton;
+        [SerializeField] private UpgradeView orbitSpeedUpgrade;
+        [SerializeField] private UpgradeView axisSpeedUpgrade;
+        [SerializeField] private UpgradeView incomeUpgrade;
 
 
         private void Start()
@@ -16,7 +18,7 @@ namespace Game.Scripts.UI
             PlanetSelector.SelectedObjectChangedEvent += UpdateWindow;
             Wallet.MoneyChangedEvent += UpdateWindow;
 
-            buySatelliteButton.onClick.AddListener(() =>
+            buySatelliteButton.Subscribe(() =>
             {
                 double nextSatellitePrice = StaticData.Price.NextSatellitePrice(
                     PlanetSelector.SelectedBody.Depth,
@@ -37,14 +39,40 @@ namespace Game.Scripts.UI
             buySatelliteButton.gameObject.SetActive(canCreateSatellite);
             if (canCreateSatellite)
                 UpdatePriceButton();
+
+            UpdateUpgrades();
+        }
+
+        private void UpdateUpgrades()
+        {
+            var selectedBody = PlanetSelector.SelectedBody;
+            if (selectedBody is Planet planet)
+            {
+                var upgradeData = planet.UpgradeData as PlanetUpgradeData;
+                orbitSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
+                {
+                    Upgrade = upgradeData.OrbitSpeedUpgrade
+                });
+                orbitSpeedUpgrade.gameObject.SetActive(true);
+            }
+            else
+                orbitSpeedUpgrade.gameObject.SetActive(false);
+
+            axisSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
+            {
+                Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade
+            });
+
+            incomeUpgrade.UpdateCell(new UpgradeView.Protocol
+            {
+                Upgrade = selectedBody.UpgradeData.IncomeUpgrade
+            });
         }
 
         private void UpdatePriceButton()
         {
             double nextSatellitePrice = StaticData.Price.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount);
-            nextSatellitePriceText.text = nextSatellitePrice.ToShortString();
-            buySatelliteButton.interactable = Wallet.CurrentMoney >= nextSatellitePrice;
-            nextSatellitePriceText.color = Wallet.CurrentMoney >= nextSatellitePrice ? Color.white : Color.red;
+            buySatelliteButton.UpdatePrice(nextSatellitePrice, Wallet.CurrentMoney >= nextSatellitePrice);
         }
 
         private void OnDestroy()

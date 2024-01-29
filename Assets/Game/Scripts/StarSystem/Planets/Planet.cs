@@ -8,14 +8,13 @@ namespace Game.Scripts.StarSystem.Planets
 {
     public class Planet : SpaceBody
     {
-        private readonly PlanetUpgradeData _upgradeData;
         private readonly float _orbitRadius;
 
         public override double IncomePerSecond
         {
             get
             {
-                return StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade) + StaticData.Income.PerOrbit(Depth, _upgradeData.IncomeUpgrade);
+                return StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade) + StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade);
             }
         }
 
@@ -53,19 +52,19 @@ namespace Game.Scripts.StarSystem.Planets
             View = PlanetViewBuilder.Create(Size);
             Init();
 
-            _upgradeData = new();
+            UpgradeData = new PlanetUpgradeData();
             planetMotionData.AxisTurnEvent += AddAxisReward;
             planetMotionData.OrbitTurnEvent += AddOrbitReward;
         }
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade));
         }
 
         private void AddOrbitReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerOrbit(Depth, _upgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade));
         }
     }
 }

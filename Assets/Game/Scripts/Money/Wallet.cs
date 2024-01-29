@@ -7,6 +7,8 @@ namespace Game.Scripts.Money
         public static event Action MoneyChangedEvent;
         public static double CurrentMoney { get; private set; }
 
+        public static bool HasMoney(double value) => CurrentMoney >= value;
+
         public static void AddMoney(double count)
         {
             if (count < 0)
