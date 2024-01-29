@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace Game.Scripts.UI
 {
     [RequireComponent(typeof(Button))]
-    public class BuyButton : MonoBehaviour
+    public class UIBuyButton : MonoBehaviour
     {
         [SerializeField, HideInInspector] private Button button;
         [SerializeField] private TextMeshProUGUI priceText;

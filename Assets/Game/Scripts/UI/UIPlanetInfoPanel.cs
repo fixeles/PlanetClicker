@@ -9,7 +9,7 @@ namespace Game.Scripts.UI
     public class UIPlanetInfoPanel : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI incomePerMinuteText;
-        [SerializeField] private BuyButton buySatelliteButton;
+        [SerializeField] private UIBuyButton uiBuySatelliteButton;
         [SerializeField] private UpgradeView orbitSpeedUpgrade;
         [SerializeField] private UpgradeView axisSpeedUpgrade;
         [SerializeField] private UpgradeView incomeUpgrade;
@@ -20,7 +20,7 @@ namespace Game.Scripts.UI
             PlanetSelector.SelectedObjectChangedEvent += UpdateWindow;
             Wallet.MoneyChangedEvent += UpdateWindow;
 
-            buySatelliteButton.Subscribe(() =>
+            uiBuySatelliteButton.Subscribe(() =>
             {
                 double nextSatellitePrice = StaticData.Price.NextSatellitePrice(
                     PlanetSelector.SelectedBody.Depth,
@@ -38,7 +38,7 @@ namespace Game.Scripts.UI
         private void UpdateWindow()
         {
             bool canCreateSatellite = PlanetSelector.SelectedBody.CanCreateSatellite;
-            buySatelliteButton.gameObject.SetActive(canCreateSatellite);
+            uiBuySatelliteButton.gameObject.SetActive(canCreateSatellite);
             if (canCreateSatellite)
                 UpdatePriceButton();
 
@@ -77,7 +77,7 @@ namespace Game.Scripts.UI
         private void UpdatePriceButton()
         {
             double nextSatellitePrice = StaticData.Price.NextSatellitePrice(PlanetSelector.SelectedBody.Depth, PlanetSelector.SelectedBody.SatellitesCount);
-            buySatelliteButton.UpdatePrice(nextSatellitePrice, Wallet.CurrentMoney >= nextSatellitePrice);
+            uiBuySatelliteButton.UpdatePrice(nextSatellitePrice, Wallet.CurrentMoney >= nextSatellitePrice);
         }
 
         private void OnDestroy()

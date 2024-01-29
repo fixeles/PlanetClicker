@@ -8,7 +8,7 @@ namespace Game.Scripts.UI
     public class UpgradeView : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI description;
-        [SerializeField] private BuyButton upgradeBtn;
+        [SerializeField] private UIBuyButton upgradeBtn;
 
         public void UpdateCell(Protocol protocol)
         {

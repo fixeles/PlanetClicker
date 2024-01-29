@@ -8,7 +8,6 @@ namespace Game.Scripts.StarSystem.Common
 {
     public abstract class SpaceBody
     {
-        public static event Action NewBodyCreatedEvent; 
         public static double TotalIncomePerSecond => AllBodies.Sum(spaceBody => spaceBody.IncomePerSecond);
 
         private static readonly List<SpaceBody> AllBodies = new();
@@ -53,7 +52,6 @@ namespace Game.Scripts.StarSystem.Common
             View.Init(MotionData);
             View.SelectEvent += Select;
             AllBodies.Add(this);
-            NewBodyCreatedEvent?.Invoke();
         }
 
         private void Select()
