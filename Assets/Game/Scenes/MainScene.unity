@@ -231,7 +231,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 140408975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23fb1ae9b474d32a72973c8f7c3f1e7, type: 3}
+  m_Script: {fileID: 11500000, guid: b19685e9485d16749992f599f441c983, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   viewContainerPrefab: {fileID: 7848350406842400364, guid: 88276f53bc4ab7d46b86932b314917a0,
@@ -318,9 +318,9 @@ MonoBehaviour:
   - {fileID: 3300000, guid: 3f6be29df8c972240b4e3d8547b5df73, type: 3}
   - {fileID: 3300000, guid: acdc67b739c60a548949f743c3be1ea8, type: 3}
   stars:
-  - {fileID: 571107925161351034, guid: 70ff459556dc23241abd7beaa03857a8, type: 3}
-  - {fileID: 926830052330676498, guid: a0f3a9c945782ad459965d78f38d9064, type: 3}
   - {fileID: 3158439979501939028, guid: 3ad4bd2fafe480c46ae0afb48e11e47d, type: 3}
+  - {fileID: 926830052330676498, guid: a0f3a9c945782ad459965d78f38d9064, type: 3}
+  - {fileID: 571107925161351034, guid: 70ff459556dc23241abd7beaa03857a8, type: 3}
 --- !u!114 &140408979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1768,8 +1768,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 21b671f4d95ca6a468785cbef8b9fdeb, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: b93530e7b4256b84aa0faf38fb1548ad, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
