@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using SolarSystem;
 using UnityEngine;
@@ -9,6 +10,8 @@ namespace Game.Scripts.StarSystem.Planets
     [Serializable]
     public class PlanetMotionData : IMotionData
     {
+        private readonly Upgrade _axisUpgrade;
+        private readonly Upgrade _orbitUpgrade;
         public event Action AxisTurnEvent;
         public event Action OrbitTurnEvent;
         [SerializeField, Range(-90, 90)] private float tilt;
@@ -24,8 +27,10 @@ namespace Game.Scripts.StarSystem.Planets
         [field: SerializeField] public Vector3 Position { get; private set; }
         [field: SerializeField] public Quaternion Rotation { get; private set; }
 
-        public PlanetMotionData(float orbitRadius, int depth)
+        public PlanetMotionData(float orbitRadius, int depth, Upgrade axisUpgrade, Upgrade orbitUpgrade)
         {
+            _axisUpgrade = axisUpgrade;
+            _orbitUpgrade = orbitUpgrade;
             var ellipseDistortion = Random.Range(0.5f, 1f);
             var isLeftDeform = Random.Range(0, 2);
             if (isLeftDeform == 1)
@@ -39,27 +44,28 @@ namespace Game.Scripts.StarSystem.Planets
                 apoapsis = orbitRadius;
             }
 
-            orbitPerSecond = Random.Range(0.2f, 0.4f) / orbitRadius * depth;
-            orbitState = Random.Range(0, 0.5f);
-            axisPerSecond = Random.Range(0.5f, 0.15f);
-            axisState = Random.Range(0, 0.5f);
+            orbitPerSecond = 0.02f / orbitRadius * depth;
+            orbitState = Random.Range(-0.5f, 0.5f);
+            axisPerSecond = 0.03f * depth;
+            axisState = Random.Range(-0.5f, 0.5f);
 
             SetRandomValues();
         }
 
-        public float OrbitPerSecond => orbitPerSecond;
-        public float AxisPerSecond => axisPerSecond;
+        public float OrbitPerSecond => orbitPerSecond + StaticData.Upgrade.AdditionalOrbitSpeed(_orbitUpgrade.Level);
+        public float AxisPerSecond => axisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(_axisUpgrade.Level);
 
         public void Update(Vector3 parentPosition)
         {
-            orbitState += Time.deltaTime * orbitPerSecond;
-            if (orbitState is > 1 or < 0)
+            orbitState += Time.deltaTime * AxisPerSecond;
+            if (orbitState is > 1 or < -1)
             {
                 orbitState %= 1;
                 OrbitTurnEvent?.Invoke();
             }
-            axisState += Time.deltaTime * axisPerSecond;
-            if (axisState is > 1 or < 0)
+
+            axisState += Time.deltaTime * OrbitPerSecond;
+            if (axisState is > 1 or < -1)
             {
                 axisState %= 1;
                 AxisTurnEvent?.Invoke();

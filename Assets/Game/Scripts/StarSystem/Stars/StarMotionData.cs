@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,12 +14,19 @@ namespace Game.Scripts.StarSystem.Stars
         [SerializeField] private float axisPerSecond = 0.03f;
         [field: SerializeField] public Quaternion Rotation { get; private set; }
 
-        public float AxisPerSecond => axisPerSecond;
+        private Upgrade _axisSpeedUpgrade;
+        public float AxisPerSecond => axisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(_axisSpeedUpgrade.Level);
+
         public Vector3 Position => Vector3.zero;
+
+        public StarMotionData(Upgrade axisSpeedUpgrade)
+        {
+            _axisSpeedUpgrade = axisSpeedUpgrade;
+        }
 
         public void Update(Vector3 parentPosition)
         {
-            axisState += Time.deltaTime * axisPerSecond;
+            axisState += Time.deltaTime * AxisPerSecond;
             if (axisState is > 1 or < 0)
             {
                 axisState %= 1;

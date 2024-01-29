@@ -11,13 +11,14 @@ namespace Game.Scripts
         private static StaticData _instance;
         [SerializeField] private IncomeData _incomeData;
         [SerializeField] private PriceData _priceData;
+        [SerializeField] private UpgradeData _upgradeData;
 
+        public static UpgradeData Upgrade => _instance._upgradeData;
         public static IncomeData Income => _instance._incomeData;
         public static PriceData Price => _instance._priceData;
 
         [Header("Planets data")]
         [SerializeField] private float satelliteSizeStep = 0.4f;
-
 
 
         public static float SatelliteSizeStep => _instance.satelliteSizeStep;
@@ -29,19 +30,23 @@ namespace Game.Scripts
         [Serializable]
         public class IncomeData
         {
-            [SerializeField] private AnimationCurve upgradeMultiplier;
             [SerializeField] private AnimationCurve perClickByTotalBodiesCount;
             [SerializeField] private AnimationCurve perAxisByDepth;
             [SerializeField] private AnimationCurve perOrbitByDepth;
-
-            public float PerAxis(int depth, Upgrade incomeUpgrade)
+            
+            public double PerAxisForPlanet(int depth, Upgrade incomeUpgrade)
             {
-                return perAxisByDepth.Evaluate(depth) * upgradeMultiplier.Evaluate(incomeUpgrade.Level);
+                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level);
             }
 
-            public float PerOrbit(int depth, Upgrade incomeUpgrade)
+            public double PerAxisForStar(int depth, Upgrade incomeUpgrade)
             {
-                return perOrbitByDepth.Evaluate(depth) * upgradeMultiplier.Evaluate(incomeUpgrade.Level);
+                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level) * SpaceBody.TotalBodiesCount;
+            }
+
+            public double PerOrbit(int depth, Upgrade incomeUpgrade)
+            {
+                return perOrbitByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level);
             }
 
             public double PerClick => perClickByTotalBodiesCount.Evaluate(SpaceBody.TotalBodiesCount);
@@ -66,6 +71,20 @@ namespace Game.Scripts
             }
 
             public double NextUpgradePrice(int depth, int level) => multiplierByDepth.Evaluate(depth) * upgradePriceByLevel.Evaluate(level + 1);
+        }
+
+        [Serializable]
+        public class UpgradeData
+        {
+            [SerializeField] private AnimationCurve incomeMultiplierByLevel;
+            [SerializeField] private AnimationCurve additionalAxisSpeedByLevel;
+            [SerializeField] private AnimationCurve additionalOrbitSpeedByLevel;
+
+            public double IncomeMultiplier(int level) => incomeMultiplierByLevel.Evaluate(level);
+
+            public float AdditionalAxisSpeed(int level) => additionalAxisSpeedByLevel.Evaluate(level);
+
+            public float AdditionalOrbitSpeed(int level) => additionalOrbitSpeedByLevel.Evaluate(level);
         }
     }
 }

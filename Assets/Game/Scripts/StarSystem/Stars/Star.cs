@@ -9,27 +9,28 @@ namespace Game.Scripts.StarSystem.Stars
         {
             get
             {
-                return StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade);
+                var motionData = MotionData as StarMotionData;
+                return StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade) * motionData.AxisPerSecond;
             }
         }
 
         public Star()
         {
             Size = 5;
-            var starMotionData = new StarMotionData();
+            UpgradeData = new();
+            var starMotionData = new StarMotionData(UpgradeData.AxisSpeedUpgrade);
             MotionData = starMotionData;
             Parent = this;
             View = PlanetViewBuilder.Create(Size, PlanetViewBuilder.SpaceBodyType.Star);
             Init();
 
-            UpgradeData = new();
             PlanetSelector.SelectedBody = this;
             starMotionData.AxisTurnEvent += AddAxisReward;
         }
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerAxis(Depth, UpgradeData.IncomeUpgrade));
+            Wallet.AddMoney(StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade));
         }
     }
 }

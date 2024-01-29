@@ -39,7 +39,7 @@ namespace Game.Scripts
                 > 1_000_000_000 => $"{value / 1_000_000_000:N1}B",
                 > 1_000_000 => $"{value / 1_000_000:N1}M",
                 > 1_000 => $"{value / 1_000:N1}K",
-                _ => value.ToString("0"),
+                _ => value.ToString("0.0"),
             };
         }
 

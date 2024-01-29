@@ -17,7 +17,7 @@ namespace Game.Scripts.Money
             if (IsCursorOverUI())
                 return;
 
-            // Wallet.AddMoney(2 *( Wallet.CurrentMoney+1));
+            Wallet.AddMoney(2 *( Wallet.CurrentMoney+1));
            Wallet.AddMoney(StaticData.Income.PerClick);
         }
 

@@ -1,12 +1,14 @@
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Planets;
+using TMPro;
 using UnityEngine;
 
 namespace Game.Scripts.UI
 {
     public class UIPlanetInfoPanel : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI incomePerMinuteText;
         [SerializeField] private BuyButton buySatelliteButton;
         [SerializeField] private UpgradeView orbitSpeedUpgrade;
         [SerializeField] private UpgradeView axisSpeedUpgrade;
@@ -41,7 +43,10 @@ namespace Game.Scripts.UI
                 UpdatePriceButton();
 
             UpdateUpgrades();
+            UpdateIncomeText();
         }
+
+        private void UpdateIncomeText() => incomePerMinuteText.text = $"{(PlanetSelector.SelectedBody.IncomePerSecond * 60).ToShortString()}/min";
 
         private void UpdateUpgrades()
         {
