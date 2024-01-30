@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using FPS.Pool;
+using Game.Scripts.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -17,8 +19,11 @@ namespace Game.Scripts.Money
             if (IsCursorOverUI())
                 return;
 
-            Wallet.AddMoney(2 *( Wallet.CurrentMoney+1));
-           Wallet.AddMoney(StaticData.Income.PerClick);
+
+            var reward = StaticData.Income.PerClick + 2 * (Wallet.CurrentMoney + 1);
+            Wallet.AddMoney(reward);
+
+            FluffyPool.Get<UIFloatingText>().ConfigureForClick($"+{reward.ToShortString()}");
         }
 
         private bool IsCursorOverUI()

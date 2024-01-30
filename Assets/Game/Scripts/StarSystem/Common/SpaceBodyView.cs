@@ -15,6 +15,7 @@ namespace Game.Scripts.StarSystem.Common
         [SerializeField] private TrailRenderer trail;
         [SerializeField] private Transform cachedTransform;
 
+        public Transform CachedTransform => cachedTransform;
 
         public void Init(IMotionData data)
         {

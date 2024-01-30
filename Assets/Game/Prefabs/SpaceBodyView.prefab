@@ -105,7 +105,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.47124144, g: 0.3537736, b: 1, a: 0.46666667}
+      key0: {r: 0.47124144, g: 0.3537736, b: 1, a: 0.11764706}
       key1: {r: 1, g: 1, b: 1, a: 0.025434852}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -196,10 +196,10 @@ MonoBehaviour:
     periapsis: 0.01
     apoapsis: 0
     orbitTilt: {x: 0, y: 0}
-    orbitLoopState: 0
+    orbitState: 0
     orbitPerSecond: 0
-    selfRotationState: 0
-    selfRotationPerSecond: 0.1
+    axisState: 0
+    axisPerSecond: 0
     <Position>k__BackingField: {x: 0, y: 0, z: 0}
     <Rotation>k__BackingField: {x: 0, y: 0, z: 0, w: 0}
   trail: {fileID: 4417225919021886382}

@@ -1,5 +1,7 @@
+using FPS.Pool;
 using Game.Scripts.Money;
 using Game.Scripts.StarSystem.Common;
+using Game.Scripts.UI;
 
 namespace Game.Scripts.StarSystem.Stars
 {
@@ -30,7 +32,9 @@ namespace Game.Scripts.StarSystem.Stars
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade));
+            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade);
+            Wallet.AddMoney(reward);
+            FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }
     }
 }

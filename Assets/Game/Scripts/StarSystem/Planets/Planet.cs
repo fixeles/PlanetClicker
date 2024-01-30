@@ -1,8 +1,10 @@
 using System;
+using FPS.Pool;
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using Game.Scripts.StarSystem.Stars;
+using Game.Scripts.UI;
 
 namespace Game.Scripts.StarSystem.Planets
 {
@@ -63,12 +65,16 @@ namespace Game.Scripts.StarSystem.Planets
 
         private void AddAxisReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade));
+            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade);
+            Wallet.AddMoney(reward);
+            FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }
 
         private void AddOrbitReward()
         {
-            Wallet.AddMoney(StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade));
+            double reward = StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade);
+            Wallet.AddMoney(reward);
+            FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }
     }
 }
