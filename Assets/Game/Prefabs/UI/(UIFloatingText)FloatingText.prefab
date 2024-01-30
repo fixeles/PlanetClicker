@@ -152,8 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   content: {fileID: 2933395068565868059}
   canvasGroup: {fileID: 816837603268549279}
-  upwardSpeed: 50
-  fadeTime: 2
+  upwardSpeed: 75
+  fadeTime: 1.5
   cachedTransform: {fileID: 3533070760311501482}
 --- !u!225 &816837603268549279
 CanvasGroup:

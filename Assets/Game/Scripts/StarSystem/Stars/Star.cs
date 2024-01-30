@@ -11,10 +11,18 @@ namespace Game.Scripts.StarSystem.Stars
         {
             get
             {
-                var motionData = MotionData as StarMotionData;
-                return StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade) * motionData.AxisPerSecond;
+                return StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade.Level) * StarMotionData.AxisPerSecond;
             }
         }
+        public override double NextUpgradeIncomePerSecond
+        {
+            get
+            {
+                return StaticData.Income.PerAxisForStar(Depth, UpgradeData.IncomeUpgrade.Level + 1) * StarMotionData.AxisPerSecond;
+            }
+        }
+
+        public StarMotionData StarMotionData => MotionData as StarMotionData;
 
         public Star()
         {
@@ -32,7 +40,7 @@ namespace Game.Scripts.StarSystem.Stars
 
         private void AddAxisReward()
         {
-            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade);
+            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level);
             Wallet.AddMoney(reward);
             FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }

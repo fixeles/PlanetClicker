@@ -1,5 +1,4 @@
 using System;
-using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using UnityEngine;
 
@@ -33,20 +32,20 @@ namespace Game.Scripts
             [SerializeField] private AnimationCurve perClickByTotalBodiesCount;
             [SerializeField] private AnimationCurve perAxisByDepth;
             [SerializeField] private AnimationCurve perOrbitByDepth;
-            
-            public double PerAxisForPlanet(int depth, Upgrade incomeUpgrade)
+
+            public double PerAxisForPlanet(int depth, int incomeUpgradeLevel)
             {
-                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level);
+                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgradeLevel);
             }
 
-            public double PerAxisForStar(int depth, Upgrade incomeUpgrade)
+            public double PerAxisForStar(int depth, int incomeUpgradeLevel)
             {
-                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level) * SpaceBody.TotalBodiesCount;
+                return perAxisByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgradeLevel) * SpaceBody.TotalBodiesCount;
             }
 
-            public double PerOrbit(int depth, Upgrade incomeUpgrade)
+            public double PerOrbit(int depth, int incomeUpgradeLevel)
             {
-                return perOrbitByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgrade.Level);
+                return perOrbitByDepth.Evaluate(depth) * Upgrade.IncomeMultiplier(incomeUpgradeLevel);
             }
 
             public double PerClick => perClickByTotalBodiesCount.Evaluate(SpaceBody.TotalBodiesCount);

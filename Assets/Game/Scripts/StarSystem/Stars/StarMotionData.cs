@@ -7,33 +7,23 @@ using Random = UnityEngine.Random;
 namespace Game.Scripts.StarSystem.Stars
 {
     [Serializable]
-    public class StarMotionData : IMotionData
+    public class StarMotionData : SpaceBodyMotionData
     {
-        public event Action AxisTurnEvent;
-        [SerializeField] private float axisState = Random.Range(0, 0.5f);
-        [SerializeField] private float axisPerSecond = 0.03f;
-        [field: SerializeField] public Quaternion Rotation { get; private set; }
+        // [SerializeField] private float axisState = Random.Range(0, 0.5f);
+        //[SerializeField] private float axisPerSecond = 0.03f;
 
-        private Upgrade _axisSpeedUpgrade;
-        public float AxisPerSecond => axisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(_axisSpeedUpgrade.Level);
 
-        public Vector3 Position => Vector3.zero;
 
-        public StarMotionData(Upgrade axisSpeedUpgrade)
+        public StarMotionData(Upgrade axisUpgrade) : base(axisUpgrade)
         {
-            _axisSpeedUpgrade = axisSpeedUpgrade;
+            AxisState = Random.Range(0, 0.5f);
+            AxisPerSecond = 0.03f;
         }
 
-        public void Update(Vector3 parentPosition)
+        public override void Update(Vector3 parentPosition)
         {
-            axisState += Time.deltaTime * AxisPerSecond;
-            if (axisState is > 1 or < 0)
-            {
-                axisState %= 1;
-                AxisTurnEvent?.Invoke();
-            }
-
-            Rotation = Quaternion.Euler(0, 0, 0) * Quaternion.Euler(0, -axisState * 360, 0);
+            base.Update(parentPosition);
+            Rotation = Quaternion.Euler(0, 0, 0) * Quaternion.Euler(0, -AxisState * 360, 0);
         }
     }
 }

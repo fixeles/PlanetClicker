@@ -1,14 +1,12 @@
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Planets;
-using TMPro;
 using UnityEngine;
 
 namespace Game.Scripts.UI
 {
     public class UIPlanetInfoPanel : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI incomePerMinuteText;
         [SerializeField] private UIBuyButton uiBuySatelliteButton;
         [SerializeField] private UpgradeView orbitSpeedUpgrade;
         [SerializeField] private UpgradeView axisSpeedUpgrade;
@@ -43,10 +41,7 @@ namespace Game.Scripts.UI
                 UpdatePriceButton();
 
             UpdateUpgrades();
-            UpdateIncomeText();
         }
-
-        private void UpdateIncomeText() => incomePerMinuteText.text = $"{(PlanetSelector.SelectedBody.IncomePerSecond * 60).ToShortString()}/min";
 
         private void UpdateUpgrades()
         {
@@ -56,7 +51,8 @@ namespace Game.Scripts.UI
                 var upgradeData = planet.UpgradeData as PlanetUpgradeData;
                 orbitSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
                 {
-                    Upgrade = upgradeData.OrbitSpeedUpgrade
+                    Upgrade = upgradeData.OrbitSpeedUpgrade,
+                    Description = $"{planet.PlanetMotionData.OrbitPerSecond * 60:0.0}/min=>\n{planet.PlanetMotionData.NextUpgradeOrbitPerSecond * 60:0.0}/min"
                 });
                 orbitSpeedUpgrade.gameObject.SetActive(true);
             }
@@ -65,12 +61,14 @@ namespace Game.Scripts.UI
 
             axisSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
             {
-                Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade
+                Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade,
+                Description = $"{selectedBody.MotionData.AxisPerSecond * 60:0.0}/min=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/min"
             });
 
             incomeUpgrade.UpdateCell(new UpgradeView.Protocol
             {
-                Upgrade = selectedBody.UpgradeData.IncomeUpgrade
+                Upgrade = selectedBody.UpgradeData.IncomeUpgrade,
+                Description = $"{(selectedBody.IncomePerSecond * 60).ToShortString()}/min=>\n{(selectedBody.NextUpgradeIncomePerSecond * 60).ToShortString()}/min"
             });
         }
 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Game.Scripts.Money.Upgrades;
@@ -12,10 +11,11 @@ namespace Game.Scripts.StarSystem.Common
 
         private static readonly List<SpaceBody> AllBodies = new();
         public abstract double IncomePerSecond { get; }
+        public abstract double NextUpgradeIncomePerSecond { get; }
         public SpaceBodyUpgradeData UpgradeData { get; protected set; }
         public SpaceBodyView View { get; protected set; }
 
-        protected IMotionData MotionData;
+        public SpaceBodyMotionData MotionData { get; protected set; }
         protected SpaceBody Parent;
 
         internal protected readonly List<Planet> Satellites = new();

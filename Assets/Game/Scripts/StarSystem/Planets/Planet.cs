@@ -18,10 +18,22 @@ namespace Game.Scripts.StarSystem.Planets
             {
                 var motionData = MotionData as PlanetMotionData;
                 return
-                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade) * motionData.AxisPerSecond +
-                    StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade) * motionData.OrbitPerSecond;
+                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level) * motionData.AxisPerSecond +
+                    StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade.Level) * motionData.OrbitPerSecond;
             }
         }
+        public override double NextUpgradeIncomePerSecond
+        {
+            get
+            {
+                var motionData = MotionData as PlanetMotionData;
+                return
+                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level + 1) * motionData.AxisPerSecond +
+                    StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade.Level + 1) * motionData.OrbitPerSecond;
+            }
+        }
+
+        public PlanetMotionData PlanetMotionData => MotionData as PlanetMotionData;
 
         public Planet(SpaceBody parent)
         {
@@ -65,14 +77,14 @@ namespace Game.Scripts.StarSystem.Planets
 
         private void AddAxisReward()
         {
-            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade);
+            double reward = StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level);
             Wallet.AddMoney(reward);
             FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }
 
         private void AddOrbitReward()
         {
-            double reward = StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade);
+            double reward = StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade.Level);
             Wallet.AddMoney(reward);
             FluffyPool.Get<UIFloatingText>().ConfigureForTarget(View.CachedTransform, $"+{reward.ToShortString()}");
         }
