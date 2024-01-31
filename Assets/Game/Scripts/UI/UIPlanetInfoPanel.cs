@@ -1,6 +1,6 @@
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
-using Game.Scripts.StarSystem.Planets;
+using Game.Scripts.Space.Planets;
 using UnityEngine;
 
 namespace Game.Scripts.UI

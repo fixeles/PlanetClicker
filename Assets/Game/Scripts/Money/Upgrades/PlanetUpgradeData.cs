@@ -2,11 +2,7 @@ namespace Game.Scripts.Money.Upgrades
 {
     public class PlanetUpgradeData : SpaceBodyUpgradeData
     {
-        public readonly Upgrade OrbitSpeedUpgrade;
+        public readonly Upgrade OrbitSpeedUpgrade = new();
 
-        public PlanetUpgradeData()
-        {
-            OrbitSpeedUpgrade = new();
-        }
     }
 }

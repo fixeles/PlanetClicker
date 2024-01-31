@@ -1,4 +1,4 @@
-using Game.Scripts.StarSystem.Common;
+using Game.Scripts.Space.Common;
 using TMPro;
 using UnityEngine;
 

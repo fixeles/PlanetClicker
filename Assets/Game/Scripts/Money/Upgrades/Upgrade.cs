@@ -1,17 +1,15 @@
+using Newtonsoft.Json;
+
 namespace Game.Scripts.Money.Upgrades
 {
     public class Upgrade
     {
+        [JsonProperty]
         public int Level { get; private set; }
 
-        public Upgrade(int level)
+        public Upgrade(int level = 1)
         {
             Level = level;
-        }
-
-        public Upgrade()
-        {
-            Level = 1;
         }
 
         public void AddLevel()

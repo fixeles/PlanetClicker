@@ -258,6 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 140408980}
+  - component: {fileID: 140408982}
   - component: {fileID: 140408979}
   - component: {fileID: 140408978}
   - component: {fileID: 140408977}
@@ -437,6 +438,19 @@ MonoBehaviour:
       type: 3}
     <Count>k__BackingField: 10
     <Key>k__BackingField: 
+--- !u!114 &140408982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140408975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fec564ef2d74f7798335dc9d9a45f1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  starSystem: {fileID: 140408979}
 --- !u!1 &169738199
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,10 +3186,10 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1447365410}
   - {fileID: 330585546}
   - {fileID: 116391851}
   - {fileID: 2095777267}
   - {fileID: 1820996661}
   - {fileID: 420997608}
   - {fileID: 140408980}
-  - {fileID: 1447365410}
