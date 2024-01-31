@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using FPS.Pool;
+using Game.Scripts.Core;
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.Serialization.DTO;

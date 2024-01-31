@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using FPS.Pool;
+using Game.Scripts.Core;
 using Game.Scripts.UI;
 using UnityEngine;
 using UnityEngine.EventSystems;

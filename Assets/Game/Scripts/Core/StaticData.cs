@@ -2,7 +2,7 @@ using System;
 using Game.Scripts.Space.Common;
 using UnityEngine;
 
-namespace Game.Scripts
+namespace Game.Scripts.Core
 {
     [CreateAssetMenu]
     public class StaticData : ScriptableObject

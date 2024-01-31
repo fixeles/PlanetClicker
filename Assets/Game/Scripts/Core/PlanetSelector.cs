@@ -1,7 +1,7 @@
 using System;
 using Game.Scripts.Space.Common;
 
-namespace Game.Scripts
+namespace Game.Scripts.Core
 {
     public class PlanetSelector
     {

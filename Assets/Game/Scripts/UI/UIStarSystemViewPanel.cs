@@ -1,5 +1,6 @@
 using System.Collections;
 using Cinemachine;
+using Game.Scripts.Core;
 using UnityEngine;
 using UnityEngine.UI;
 
