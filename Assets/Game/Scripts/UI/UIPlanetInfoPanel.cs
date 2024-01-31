@@ -62,7 +62,7 @@ namespace Game.Scripts.UI
             axisSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
             {
                 Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade,
-                Description = $"{selectedBody.MotionData.AxisPerSecond * 60:0.0}/min=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/min"
+                Description = $"{selectedBody.MotionData.AxisPerSecondProp * 60:0.0}/min=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/min"
             });
 
             incomeUpgrade.UpdateCell(new UpgradeView.Protocol

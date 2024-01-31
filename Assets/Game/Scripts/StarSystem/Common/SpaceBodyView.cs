@@ -1,5 +1,4 @@
 using System;
-using Game.Scripts.StarSystem.Planets;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,22 +7,12 @@ namespace Game.Scripts.StarSystem.Common
     public class SpaceBodyView : MonoBehaviour, IPointerClickHandler
     {
         public event Action SelectEvent;
-#if UNITY_EDITOR
-        [SerializeField] private PlanetMotionData motionData;
-#endif
+        public int SkinId;
 
         [SerializeField] private TrailRenderer trail;
         [SerializeField] private Transform cachedTransform;
 
         public Transform CachedTransform => cachedTransform;
-
-        public void Init(IMotionData data)
-        {
-#if UNITY_EDITOR
-            if (data is PlanetMotionData planetMotionData)
-                motionData = planetMotionData;
-#endif
-        }
 
         public void UpdateTransform(IMotionData data)
         {

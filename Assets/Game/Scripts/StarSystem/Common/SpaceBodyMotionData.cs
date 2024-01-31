@@ -1,24 +1,26 @@
 using System;
+using Game.Scripts.DTO;
 using Game.Scripts.Money.Upgrades;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Game.Scripts.StarSystem.Common
 {
-    public abstract class SpaceBodyMotionData : IMotionData
+    public abstract class SpaceBodyMotionData : IMotionData, IDTOBuilder<SpaceBodyMotionDTO>
     {
         public event Action AxisTurnEvent;
         protected float AxisState;
         protected float AxisTilt;
-        
-        private readonly Upgrade _axisUpgrade;
-        private float _axisPerSecond;
-        
-        public float NextUpgradeAxisPerSecond => _axisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(_axisUpgrade.Level + 1);
-        
-        public float AxisPerSecond
+        protected float AxisPerSecond;
+
+        public Upgrade AxisUpgrade { get; protected set; }
+
+        public float NextUpgradeAxisPerSecond => AxisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(AxisUpgrade.Level + 1);
+
+        public float AxisPerSecondProp
         {
-            get => _axisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(_axisUpgrade.Level);
-            protected set => _axisPerSecond = value;
+            get => AxisPerSecond + StaticData.Upgrade.AdditionalAxisSpeed(AxisUpgrade.Level);
+            protected set => AxisPerSecond = value;
         }
 
         public Vector3 Position { get; protected set; }
@@ -27,18 +29,37 @@ namespace Game.Scripts.StarSystem.Common
 
         protected SpaceBodyMotionData(Upgrade axisUpgrade)
         {
-            _axisUpgrade = axisUpgrade;
+            AxisUpgrade = axisUpgrade;
         }
 
 
         public virtual void Update(Vector3 parentPosition)
         {
-            AxisState += Time.deltaTime * AxisPerSecond;
+            AxisState += Time.deltaTime * AxisPerSecondProp;
             if (AxisState is > 1 or < -1)
             {
                 AxisState %= 1;
                 AxisTurnEvent?.Invoke();
             }
+        }
+
+        public SpaceBodyMotionDTO DTO
+        {
+            get => new(AxisState, AxisTilt, AxisPerSecond);
+        }
+
+        public virtual void InitAsNew()
+        {
+            AxisState = Random.Range(0, 0.5f);
+            AxisPerSecondProp = 0.03f;
+            AxisTilt = Random.Range(-60, 60);
+        }
+
+        public void InitByDTO(SpaceBodyMotionDTO dto)
+        {
+            AxisPerSecond = dto.AxisPerSecond;
+            AxisState = dto.AxisState;
+            AxisTilt = dto.AxisTilt;
         }
     }
 }

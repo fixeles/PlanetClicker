@@ -1,23 +1,22 @@
 using System;
+using Game.Scripts.DTO;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Game.Scripts.StarSystem.Stars
 {
     [Serializable]
     public class StarMotionData : SpaceBodyMotionData
     {
-        // [SerializeField] private float axisState = Random.Range(0, 0.5f);
-        //[SerializeField] private float axisPerSecond = 0.03f;
-
-
-
         public StarMotionData(Upgrade axisUpgrade) : base(axisUpgrade)
         {
-            AxisState = Random.Range(0, 0.5f);
-            AxisPerSecond = 0.03f;
+            InitAsNew();
+        }
+
+        public StarMotionData(Upgrade axisUpgrade, SpaceBodyMotionDTO dto) : base(axisUpgrade)
+        {
+            InitByDTO(dto);
         }
 
         public override void Update(Vector3 parentPosition)

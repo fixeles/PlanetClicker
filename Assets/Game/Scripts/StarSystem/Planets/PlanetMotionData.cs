@@ -1,4 +1,5 @@
 using System;
+using Game.Scripts.DTO;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
 using SolarSystem;
@@ -7,13 +8,13 @@ using Random = UnityEngine.Random;
 
 namespace Game.Scripts.StarSystem.Planets
 {
-    public class PlanetMotionData : SpaceBodyMotionData
+    public class PlanetMotionData : SpaceBodyMotionData, IDTOBuilder<PlanetMotionDTO>
     {
-        private readonly Upgrade _orbitUpgrade;
         public event Action OrbitTurnEvent;
-        private readonly float _periapsis;
-        private readonly float _apoapsis;
-        private readonly float _orbitPerSecond;
+        private Upgrade _orbitUpgrade;
+        private float _periapsis;
+        private float _apoapsis;
+        private float _orbitPerSecond;
         private Vector2 _orbitTilt;
         private float _orbitState;
 
@@ -35,10 +36,27 @@ namespace Game.Scripts.StarSystem.Planets
 
             _orbitPerSecond = 0.02f / orbitRadius * depth;
             _orbitState = Random.Range(-0.5f, 0.5f);
-            AxisPerSecond = 0.03f * depth;
+            AxisPerSecondProp = 0.03f * depth;
             AxisState = Random.Range(-0.5f, 0.5f);
 
-            SetRandomValues();
+            AxisTilt = Random.Range(-60, 60);
+            const float orbitMaxAbsAngle = 30;
+            _orbitTilt = new Vector2(
+                Random.Range(0, orbitMaxAbsAngle),
+                Random.Range(1, orbitMaxAbsAngle));
+        }
+
+        public PlanetMotionData(Upgrade axisUpgrade, Upgrade orbitUpgrade, PlanetMotionDTO dto) : base(axisUpgrade)
+        {
+            _orbitUpgrade = orbitUpgrade;
+            _periapsis = dto.Periapsis;
+            _apoapsis = dto.Apoapsis;
+            _orbitPerSecond = dto.OrbitPerSecond;
+            _orbitState = dto.OrbitState;
+            AxisPerSecond = dto.AxisPerSecond;
+            AxisState = dto.AxisState;
+            AxisTilt = dto.AxisTilt;
+            _orbitTilt = dto.OrbitTilt;
         }
 
         public float OrbitPerSecond => _orbitPerSecond + StaticData.Upgrade.AdditionalOrbitSpeed(_orbitUpgrade.Level);
@@ -47,7 +65,7 @@ namespace Game.Scripts.StarSystem.Planets
         public override void Update(Vector3 parentPosition)
         {
             base.Update(parentPosition);
-            _orbitState += Time.deltaTime * AxisPerSecond;
+            _orbitState += Time.deltaTime * AxisPerSecondProp;
             if (_orbitState is > 1 or < -1)
             {
                 _orbitState %= 1;
@@ -62,13 +80,34 @@ namespace Game.Scripts.StarSystem.Planets
             Rotation = Quaternion.Euler(0, 0, -AxisTilt) * Quaternion.Euler(0, -AxisState * 360, 0);
         }
 
-        private void SetRandomValues()
+        new public PlanetMotionDTO DTO
         {
-            AxisTilt = Random.Range(-60, 60);
-            const float orbitMaxAbsAngle = 30;
-            _orbitTilt = new Vector2(
-                Random.Range(0, orbitMaxAbsAngle),
-                Random.Range(1, orbitMaxAbsAngle));
+            get
+            {
+                return new(
+                    _orbitUpgrade,
+                    _orbitTilt,
+                    AxisState,
+                    AxisTilt,
+                    AxisPerSecond,
+                    _periapsis,
+                    _apoapsis,
+                    _orbitPerSecond,
+                    _orbitState);
+            }
+        }
+
+        public void InitByDTO(PlanetMotionDTO dto)
+        {
+            _orbitUpgrade = dto.OrbitUpgrade;
+            _orbitTilt = dto.OrbitTilt;
+            AxisState = dto.AxisState;
+            AxisTilt = dto.AxisTilt;
+            AxisPerSecond = dto.AxisPerSecond;
+            _periapsis = dto.Periapsis;
+            _apoapsis = dto.Apoapsis;
+            _orbitPerSecond = dto.OrbitPerSecond;
+            _orbitState = dto.OrbitState;
         }
     }
 }

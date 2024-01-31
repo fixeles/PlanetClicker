@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Game.Scripts.DTO;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Planets;
 
@@ -31,11 +32,10 @@ namespace Game.Scripts.StarSystem.Common
 
         public bool CanCreateSatellite => Size > StaticData.SatelliteSizeStep * (SatellitesCount + 2);
 
-        public void CreateSatellite()
+        public void CreateSatellite(PlanetDTO dto = null)
         {
-            var planet = new Planet(this);
+            var planet = new Planet(this, dto);
             Satellites.Add(planet);
-            PlanetSelector.SelectedBody = planet;
         }
 
         public void Update()
@@ -50,9 +50,9 @@ namespace Game.Scripts.StarSystem.Common
 
         protected void Init()
         {
-            View.Init(MotionData);
             View.SelectEvent += Select;
             AllBodies.Add(this);
+            PlanetSelector.SelectedBody = this;
         }
 
         private void Select()
@@ -60,4 +60,5 @@ namespace Game.Scripts.StarSystem.Common
             PlanetSelector.SelectedBody = this;
         }
     }
+
 }

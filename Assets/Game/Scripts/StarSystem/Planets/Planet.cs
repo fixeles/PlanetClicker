@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using FPS.Pool;
+using Game.Scripts.DTO;
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
 using Game.Scripts.StarSystem.Common;
@@ -8,7 +10,7 @@ using Game.Scripts.UI;
 
 namespace Game.Scripts.StarSystem.Planets
 {
-    public class Planet : SpaceBody
+    public class Planet : SpaceBody, IDTOBuilder<PlanetDTO>
     {
         private readonly float _orbitRadius;
 
@@ -18,7 +20,7 @@ namespace Game.Scripts.StarSystem.Planets
             {
                 var motionData = MotionData as PlanetMotionData;
                 return
-                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level) * motionData.AxisPerSecond +
+                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level) * motionData.AxisPerSecondProp +
                     StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade.Level) * motionData.OrbitPerSecond;
             }
         }
@@ -28,14 +30,14 @@ namespace Game.Scripts.StarSystem.Planets
             {
                 var motionData = MotionData as PlanetMotionData;
                 return
-                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level + 1) * motionData.AxisPerSecond +
+                    StaticData.Income.PerAxisForPlanet(Depth, UpgradeData.IncomeUpgrade.Level + 1) * motionData.AxisPerSecondProp +
                     StaticData.Income.PerOrbit(Depth, UpgradeData.IncomeUpgrade.Level + 1) * motionData.OrbitPerSecond;
             }
         }
 
         public PlanetMotionData PlanetMotionData => MotionData as PlanetMotionData;
 
-        public Planet(SpaceBody parent)
+        public Planet(SpaceBody parent, PlanetDTO dto = null)
         {
             float initialRadiusMultiplier;
             switch (parent)
@@ -60,19 +62,53 @@ namespace Game.Scripts.StarSystem.Planets
             else
                 _orbitRadius = initialRadiusMultiplier * parent.Size;
 
+            Depth = parent.Depth + 1;
+            Parent = parent;
 
+            if (dto == null)
+                InitAsNew();
+            else
+                InitByDTO(dto);
+
+
+            PlanetMotionData.AxisTurnEvent += AddAxisReward;
+            PlanetMotionData.OrbitTurnEvent += AddOrbitReward;
+            Init();
+        }
+
+        public void InitAsNew()
+        {
             var planetUpgradeData = new PlanetUpgradeData();
             UpgradeData = planetUpgradeData;
-            Depth = parent.Depth + 1;
             var planetMotionData = new PlanetMotionData(_orbitRadius, Depth, planetUpgradeData.AxisSpeedUpgrade, planetUpgradeData.OrbitSpeedUpgrade);
             MotionData = planetMotionData;
 
-            Parent = parent;
             View = PlanetViewBuilder.Create(Size);
-            Init();
+        }
 
-            planetMotionData.AxisTurnEvent += AddAxisReward;
-            planetMotionData.OrbitTurnEvent += AddOrbitReward;
+        public void InitByDTO(PlanetDTO dto)
+        {
+            var planetUpgradeData = dto.UpgradeData as PlanetUpgradeData;
+            UpgradeData = planetUpgradeData;
+            var planetMotionData = new PlanetMotionData(planetUpgradeData.AxisSpeedUpgrade, planetUpgradeData.OrbitSpeedUpgrade, dto.MotionDTO);
+            MotionData = planetMotionData;
+            View = PlanetViewBuilder.Create(Size, dto.SkinId);
+            
+            foreach (var planetDTO in dto.SatellitesDTO)
+            {
+                CreateSatellite(planetDTO);
+            }
+        }
+
+        public PlanetDTO DTO
+        {
+            get
+            {
+                return new(PlanetMotionData.DTO,
+                    Satellites.Select(satellite => satellite.DTO).ToArray(),
+                    UpgradeData as PlanetUpgradeData,
+                    View.SkinId);
+            }
         }
 
         private void AddAxisReward()

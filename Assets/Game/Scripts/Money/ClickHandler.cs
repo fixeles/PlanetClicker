@@ -20,7 +20,7 @@ namespace Game.Scripts.Money
                 return;
 
 
-            var reward = StaticData.Income.PerClick/* + 2 * (Wallet.CurrentMoney + 1)*/;
+            var reward = StaticData.Income.PerClick + 2 * (Wallet.CurrentMoney + 1);
             Wallet.AddMoney(reward);
             FluffyPool.Get<UIFloatingText>().ConfigureForClick($"+{reward.ToShortString()}");
         }

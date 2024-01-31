@@ -17,7 +17,7 @@ namespace Game.Scripts.StarSystem
             _instance = this;
         }
 
-        public static SpaceBodyView Create(float size, SpaceBodyType bodyType = SpaceBodyType.Planet)
+        public static SpaceBodyView Create(float size, int skinId = -1, SpaceBodyType bodyType = SpaceBodyType.Planet)
         {
             var newBody = Instantiate(_instance.viewContainerPrefab);
             newBody.transform.localScale = Vector3.one * size;
@@ -27,20 +27,23 @@ namespace Game.Scripts.StarSystem
             switch (bodyType)
             {
                 case SpaceBodyType.Star:
-                    newMesh = Instantiate(_instance.stars.GetRandomElement(), newBody.transform);
+                    newMesh = Instantiate(skinId < 0 ? _instance.stars.GetRandomElement(out skinId) : _instance.stars[skinId], newBody.transform);
                     break;
 
                 default:
                     if (size > 1.2f)
-                        newMesh = Instantiate(_instance.planets.GetRandomElement(), newBody.transform);
+                    {
+                        newMesh = Instantiate(skinId < 0 ? _instance.planets.GetRandomElement(out skinId) : _instance.planets[skinId], newBody.transform);
+                    }
                     else
                     {
-                        newMesh = Instantiate(_instance.moons.GetRandomElement(), newBody.transform);
+                        newMesh = Instantiate(skinId < 0 ? _instance.moons.GetRandomElement(out skinId) : _instance.moons[skinId], newBody.transform);
                         newMesh.transform.localScale = Vector3.one * 2;
                     }
                     break;
             }
-
+            
+            newBody.SkinId = skinId;
             newMesh.transform.localRotation = new Quaternion(
                 Random.Range(0f, 1f),
                 Random.Range(0f, 1f),
