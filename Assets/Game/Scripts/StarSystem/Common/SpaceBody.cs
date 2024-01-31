@@ -35,6 +35,7 @@ namespace Game.Scripts.StarSystem.Common
         {
             var planet = new Planet(this);
             Satellites.Add(planet);
+            PlanetSelector.SelectedBody = planet;
         }
 
         public void Update()

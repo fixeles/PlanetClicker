@@ -8,7 +8,7 @@ namespace Game.Scripts.UI
     {
         [SerializeField] private TextMeshProUGUI counter;
 
-        private void UpdateCounter() => counter.text = $"{(SpaceBody.TotalIncomePerSecond * 60).ToShortString()}/min";
+        private void UpdateCounter() => counter.text = $"<sprite name=\"coin\">{(SpaceBody.TotalIncomePerSecond * 60).ToShortString()}/min";
 
         private void OnEnable()
         {

@@ -11,6 +11,7 @@ namespace Game.Scripts.UI
         private void Start()
         {
             Wallet.MoneyChangedEvent += UpdateCounter;
+            UpdateCounter();
         }
 
         private void OnDestroy()
@@ -20,7 +21,7 @@ namespace Game.Scripts.UI
 
         private void UpdateCounter()
         {
-            currencyCounter.text = Wallet.CurrentMoney.ToShortString();
+            currencyCounter.text =$"<sprite name=\"coin\">{Wallet.CurrentMoney.ToShortString()}";
         }
     }
 }
