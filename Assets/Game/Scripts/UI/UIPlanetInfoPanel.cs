@@ -31,6 +31,7 @@ namespace Game.Scripts.UI
                         PlanetSelector.SelectedBody.CreateSatellite();
                     });
             });
+            UpdateWindow();
         }
 
         private void UpdateWindow()
