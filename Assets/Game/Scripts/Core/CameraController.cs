@@ -1,3 +1,4 @@
+using System;
 using Cinemachine;
 using UnityEngine;
 
@@ -12,6 +13,11 @@ namespace Game.Scripts.Core
         {
             _instance = this;
             PlanetSelector.SelectedObjectChangedEvent += FollowSelectedObject;
+        }
+
+        private void Start()
+        {
+            FollowSelectedObject();
         }
 
         private static void FollowSelectedObject()

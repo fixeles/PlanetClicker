@@ -11,6 +11,7 @@ namespace Game.Scripts.Money
     public class ClickHandler : MonoBehaviour
     {
         [SerializeField] private GraphicRaycaster raycaster;
+        [SerializeField] private ClickFX clickFX;
 
         private void Update()
         {
@@ -24,6 +25,7 @@ namespace Game.Scripts.Money
             var reward = StaticData.Income.PerClick + 2 * (Wallet.CurrentMoney + 1);
             Wallet.AddMoney(reward);
             FluffyPool.Get<UIFloatingText>().ConfigureForClick($"+{reward.ToShortString()}");
+            clickFX.Play();
         }
 
         private bool IsCursorOverUI()

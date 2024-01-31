@@ -11,7 +11,7 @@ namespace Game.Scripts.Serialization
         private const string SaveKey = "save_data";
         [SerializeField] private StarSystem starSystem;
 
-        private void Start()
+        private void Awake()
         {
             if (PlayerPrefs.HasKey(SaveKey))
             {

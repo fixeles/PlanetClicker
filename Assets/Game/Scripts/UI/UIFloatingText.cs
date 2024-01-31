@@ -56,6 +56,7 @@ namespace Game.Scripts.UI
         private IEnumerator FadeAfterClickRoutine()
         {
             var uiPosition = Input.mousePosition;
+            uiPosition.y += 50;
             while (canvasGroup.alpha > 0)
             {
                 canvasGroup.alpha -= Time.deltaTime / fadeTime;
