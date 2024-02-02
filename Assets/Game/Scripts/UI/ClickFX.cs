@@ -17,7 +17,7 @@ namespace Game.Scripts.UI
         public void Play()
         {
             Vector3 mousePosition = Input.mousePosition;
-            mousePosition.z = 5;
+            mousePosition.z = 2;
             var worldPoint = _camera.ScreenToWorldPoint(mousePosition);
             _fxTransform.position = worldPoint;
             fx.Play();
