@@ -1,3 +1,4 @@
+using FPS.LocalizationService;
 using Game.Scripts.Core;
 using Game.Scripts.Money;
 using Game.Scripts.Money.Upgrades;
@@ -54,7 +55,7 @@ namespace Game.Scripts.UI
                 orbitSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
                 {
                     Upgrade = upgradeData.OrbitSpeedUpgrade,
-                    Description = $"{planet.PlanetMotionData.OrbitPerSecond * 60:0.0}/min=>\n{planet.PlanetMotionData.NextUpgradeOrbitPerSecond * 60:0.0}/min"
+                    Description = $"{planet.PlanetMotionData.OrbitPerSecond * 60:0.0}/{Localization.Get("min")}=>\n{planet.PlanetMotionData.NextUpgradeOrbitPerSecond * 60:0.0}/{Localization.Get("min")}"
                 });
                 orbitSpeedUpgrade.gameObject.SetActive(true);
             }
@@ -64,13 +65,13 @@ namespace Game.Scripts.UI
             axisSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
             {
                 Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade,
-                Description = $"{selectedBody.MotionData.AxisPerSecondProp * 60:0.0}/min=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/min"
+                Description = $"{selectedBody.MotionData.AxisPerSecondProp * 60:0.0}/{Localization.Get("min")}=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/{Localization.Get("min")}"
             });
 
             incomeUpgrade.UpdateCell(new UpgradeView.Protocol
             {
                 Upgrade = selectedBody.UpgradeData.IncomeUpgrade,
-                Description = $"{(selectedBody.IncomePerSecond * 60).ToShortString()}/min=>\n{(selectedBody.NextUpgradeIncomePerSecond * 60).ToShortString()}/min"
+                Description = $"{(selectedBody.IncomePerSecond * 60).ToShortString()}/{Localization.Get("min")}=>\n{(selectedBody.NextUpgradeIncomePerSecond * 60).ToShortString()}/{Localization.Get("min")}"
             });
         }
 
