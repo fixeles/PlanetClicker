@@ -8,6 +8,7 @@ namespace Game.Scripts.Core
 
         private void Awake()
         {
+            Application.targetFrameRate = 75;
             staticData.Init();
         }
     }

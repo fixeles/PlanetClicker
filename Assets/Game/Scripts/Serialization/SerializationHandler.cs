@@ -25,11 +25,19 @@ namespace Game.Scripts.Serialization
             starSystem.Star = new Star();
         }
 
-        private void OnDestroy()
+        private void OnApplicationPause(bool isPaused)
         {
-            string json = JsonConvert.SerializeObject(new SaveData(Wallet.CurrentMoney, starSystem.Star.DTO));
-            PlayerPrefs.SetString(SaveKey, GZip.Compress(json));
+            if (!isPaused)
+                return;
+           
+            PlayerPrefs.SetString(SaveKey, GetCompressedSaveData());
             PlayerPrefs.Save();
+        }
+
+        private string GetCompressedSaveData()
+        {
+            string rawJson = JsonConvert.SerializeObject(new SaveData(Wallet.CurrentMoney, starSystem.Star.DTO));
+            return GZip.Compress(rawJson);
         }
     }
 }
