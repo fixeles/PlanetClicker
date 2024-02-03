@@ -10,6 +10,9 @@ namespace Game.Scripts.Serialization
     {
         private const string SaveKey = "save_data";
         [SerializeField] private StarSystem starSystem;
+        [SerializeField] private float autoSaveFrequency = 30;
+
+        private float _autoSaveTimeLeft;
 
         private void Awake()
         {
@@ -25,12 +28,25 @@ namespace Game.Scripts.Serialization
             starSystem.Star = new Star();
         }
 
-        private void OnApplicationPause(bool isPaused)
+        private void Update()
         {
-            if (!isPaused)
+            _autoSaveTimeLeft -= Time.deltaTime;
+            if (_autoSaveTimeLeft > 0)
                 return;
-           
-            PlayerPrefs.SetString(SaveKey, GetCompressedSaveData());
+
+            _autoSaveTimeLeft = autoSaveFrequency;
+            Save();
+        }
+
+        private void OnApplicationQuit()
+        {
+            Save();
+        }
+
+        private void Save()
+        {
+            string compressedSaveData = GetCompressedSaveData();
+            PlayerPrefs.SetString(SaveKey, compressedSaveData);
             PlayerPrefs.Save();
         }
 
