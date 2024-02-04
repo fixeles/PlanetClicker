@@ -1,3 +1,4 @@
+using System.Text;
 using FPS.LocalizationService;
 using Game.Scripts.Core;
 using Game.Scripts.Money;
@@ -14,6 +15,7 @@ namespace Game.Scripts.UI
         [SerializeField] private UpgradeView axisSpeedUpgrade;
         [SerializeField] private UpgradeView incomeUpgrade;
 
+        private static readonly StringBuilder StringBuilder = new();
 
         private void Start()
         {
@@ -49,30 +51,63 @@ namespace Game.Scripts.UI
         private void UpdateUpgrades()
         {
             var selectedBody = PlanetSelector.SelectedBody;
+            var localizedMinutes = Localization.Get("min");
+
             if (selectedBody is Planet planet)
             {
                 var upgradeData = planet.UpgradeData as PlanetUpgradeData;
+
+                StringBuilder.Append((planet.PlanetMotionData.OrbitPerSecond * 60).ToString(Constants.Format));
+                StringBuilder.Append(Constants.Slash);
+                StringBuilder.Append(localizedMinutes);
+                StringBuilder.Append(Constants.Arrow);
+                StringBuilder.Append(Constants.NewLine);
+                StringBuilder.Append((planet.PlanetMotionData.NextUpgradeOrbitPerSecond * 60).ToString(Constants.Format));
+                StringBuilder.Append(Constants.Slash);
+                StringBuilder.Append(localizedMinutes);
+
                 orbitSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
                 {
-                    Upgrade = upgradeData.OrbitSpeedUpgrade,
-                    Description = $"{planet.PlanetMotionData.OrbitPerSecond * 60:0.0}/{Localization.Get("min")}=>\n{planet.PlanetMotionData.NextUpgradeOrbitPerSecond * 60:0.0}/{Localization.Get("min")}"
+                    Upgrade = upgradeData!.OrbitSpeedUpgrade,
+                    Description = StringBuilder.ToString()
                 });
-                orbitSpeedUpgrade.gameObject.SetActive(true);
+                StringBuilder.Clear();
+                orbitSpeedUpgrade.gameObject.TrySetActive(true);
             }
             else
-                orbitSpeedUpgrade.gameObject.SetActive(false);
+                orbitSpeedUpgrade.gameObject.TrySetActive(false);
+
+            StringBuilder.Append((selectedBody.MotionData.AxisPerSecondProp * 60).ToString(Constants.Format));
+            StringBuilder.Append(Constants.Slash);
+            StringBuilder.Append(localizedMinutes);
+            StringBuilder.Append(Constants.Arrow);
+            StringBuilder.Append(Constants.NewLine);
+            StringBuilder.Append((selectedBody.MotionData.NextUpgradeAxisPerSecond * 60).ToString(Constants.Format));
+            StringBuilder.Append(Constants.Slash);
+            StringBuilder.Append(localizedMinutes);
 
             axisSpeedUpgrade.UpdateCell(new UpgradeView.Protocol
             {
                 Upgrade = selectedBody.UpgradeData.AxisSpeedUpgrade,
-                Description = $"{selectedBody.MotionData.AxisPerSecondProp * 60:0.0}/{Localization.Get("min")}=>\n{selectedBody.MotionData.NextUpgradeAxisPerSecond * 60:0.0}/{Localization.Get("min")}"
+                Description = StringBuilder.ToString()
             });
+            StringBuilder.Clear();
+
+            StringBuilder.Append((selectedBody.IncomePerSecond * 60).ToString(Constants.Format));
+            StringBuilder.Append(Constants.Slash);
+            StringBuilder.Append(localizedMinutes);
+            StringBuilder.Append(Constants.Arrow);
+            StringBuilder.Append(Constants.NewLine);
+            StringBuilder.Append((selectedBody.NextUpgradeIncomePerSecond * 60).ToString(Constants.Format));
+            StringBuilder.Append(Constants.Slash);
+            StringBuilder.Append(localizedMinutes);
 
             incomeUpgrade.UpdateCell(new UpgradeView.Protocol
             {
                 Upgrade = selectedBody.UpgradeData.IncomeUpgrade,
-                Description = $"{(selectedBody.IncomePerSecond * 60).ToShortString()}/{Localization.Get("min")}=>\n{(selectedBody.NextUpgradeIncomePerSecond * 60).ToShortString()}/{Localization.Get("min")}"
+                Description = StringBuilder.ToString()
             });
+            StringBuilder.Clear();
         }
 
         private void UpdatePriceButton()
@@ -84,6 +119,14 @@ namespace Game.Scripts.UI
         private void OnDestroy()
         {
             PlanetSelector.SelectedObjectChangedEvent -= UpdateWindow;
+        }
+
+        private static class Constants
+        {
+            public const string Slash = "/";
+            public const string Arrow = "=>";
+            public const string NewLine = "\n";
+            public const string Format = "0.0";
         }
     }
 }

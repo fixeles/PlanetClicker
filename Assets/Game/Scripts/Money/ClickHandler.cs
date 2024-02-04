@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text;
 using FPS.Pool;
 using Game.Scripts.Core;
 using Game.Scripts.UI;
@@ -13,6 +14,8 @@ namespace Game.Scripts.Money
         [SerializeField] private GraphicRaycaster raycaster;
         [SerializeField] private ClickFX clickFX;
 
+        private readonly StringBuilder _stringBuilder = new();
+
         private void Update()
         {
             if (!Input.GetMouseButtonDown(0))
@@ -24,7 +27,12 @@ namespace Game.Scripts.Money
 
             var reward = StaticData.Income.PerClick/* + 2 * (Wallet.CurrentMoney + 1)*/;
             Wallet.AddMoney(reward);
-            FluffyPool.Get<UIFloatingText>().ConfigureForClick($"+{reward.ToShortString()}");
+            
+            _stringBuilder.Clear();
+            _stringBuilder.Append("+");
+            _stringBuilder.Append(reward.ToShortString());
+            
+            FluffyPool.Get<UIFloatingText>().ConfigureForClick(_stringBuilder.ToString());
             clickFX.Play();
         }
 
