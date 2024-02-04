@@ -6,8 +6,8 @@ namespace FPS.LocalizationService
     [RequireComponent(typeof(TextMeshProUGUI))]
     public class LocalizedText : MonoBehaviour
     {
-        [SerializeField] private string key = "";
-        [SerializeField, HideInInspector] private TextMeshProUGUI text;
+        [SerializeField] private TextMeshProUGUI text;
+        [SerializeField] private string key;
 
         private void OnEnable()
         {
