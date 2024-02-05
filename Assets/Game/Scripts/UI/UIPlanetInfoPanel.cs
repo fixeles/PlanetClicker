@@ -10,6 +10,7 @@ namespace Game.Scripts.UI
 {
     public class UIPlanetInfoPanel : MonoBehaviour
     {
+        [SerializeField] private GameObject planetIcon;
         [SerializeField] private UIBuyButton uiBuySatelliteButton;
         [SerializeField] private UpgradeView orbitSpeedUpgrade;
         [SerializeField] private UpgradeView axisSpeedUpgrade;
@@ -42,6 +43,7 @@ namespace Game.Scripts.UI
         {
             bool canCreateSatellite = PlanetSelector.SelectedBody.CanCreateSatellite;
             uiBuySatelliteButton.gameObject.SetActive(canCreateSatellite);
+            planetIcon.SetActive(canCreateSatellite);
             if (canCreateSatellite)
                 UpdatePriceButton();
 
@@ -51,7 +53,7 @@ namespace Game.Scripts.UI
         private void UpdateUpgrades()
         {
             var selectedBody = PlanetSelector.SelectedBody;
-            var localizedMinutes = Localization.Get("min");
+            var localizedMinutes = string.Empty;
 
             if (selectedBody is Planet planet)
             {
@@ -123,7 +125,7 @@ namespace Game.Scripts.UI
 
         private static class Constants
         {
-            public const string Slash = "/";
+            public const string Slash = "";
             public const string Arrow = "=>";
             public const string NewLine = "\n";
             public const string Format = "0.0";
