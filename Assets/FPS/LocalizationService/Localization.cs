@@ -98,7 +98,7 @@ namespace FPS.LocalizationService
         //          }
         //      }
     #if UNITY_WEBGL && !UNITY_EDITOR //Windows WebGL
-        private static string SystemLanguage => GetSystemLanguageJS().Split('-')[0].ToLower();
+        private static string SystemLanguage => GetSystemLanguageJS().Split('-')[0].ToLower(); 
 
         [System.Runtime.InteropServices.DllImport("__Internal")]
         private static extern string GetSystemLanguageJS();
