@@ -308,7 +308,6 @@ GameObject:
   - component: {fileID: 140408979}
   - component: {fileID: 140408978}
   - component: {fileID: 140408977}
-  - component: {fileID: 140408976}
   - component: {fileID: 140408981}
   m_Layer: 0
   m_Name: LogicHandlers
@@ -317,19 +316,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &140408976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 140408975}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b10ca1f3a2457db30228388ebb7a91, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  staticData: {fileID: 11400000, guid: b2b68fe4ac46d5c4683d0c7dd0643ec8, type: 2}
 --- !u!114 &140408977
 MonoBehaviour:
   m_ObjectHideFlags: 0

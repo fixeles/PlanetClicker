@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game.Scripts.Core
 {
@@ -10,6 +11,15 @@ namespace Game.Scripts.Core
         {
             Application.targetFrameRate = 75;
             staticData.Init();
+
+#if UNITY_EDITOR || !UNITY_WEBGL
+            StartGame();
+#endif
+        }
+
+        public void StartGame()
+        {
+            SceneManager.LoadScene(sceneBuildIndex: 1);
         }
     }
 }
